@@ -51,8 +51,8 @@ public class CountryCodeTagger extends AbstractCurationTask
     public int perform(DSpaceObject dso) throws IOException
     {
         // Load configuration
-        isocodesJsonPath = ConfigurationManager.getProperty(PLUGIN_PREFIX, "countrycodes.iso3166.json.path");
-        cgspaceCountriesJsonPath = ConfigurationManager.getProperty(PLUGIN_PREFIX, "countrycodes.cgspaceCountries.json.resource");
+        isocodesJsonPath = "/org/cgiar/cgspace/ctasks/iso_3166-1.json";
+        cgspaceCountriesJsonPath = "/org/cgiar/cgspace/ctasks/cgspace-countries.json";
         iso3166Field = ConfigurationManager.getProperty(PLUGIN_PREFIX, "countrycodes.iso3166.field");
         iso3166Alpha2Field = ConfigurationManager.getProperty(PLUGIN_PREFIX, "countrycodes.iso3166-alpha2.field");
 
