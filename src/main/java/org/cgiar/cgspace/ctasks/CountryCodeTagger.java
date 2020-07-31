@@ -72,6 +72,7 @@ public class CountryCodeTagger extends AbstractCurationTask
             } else {
                 Gson gson = new Gson();
 
+                // TODO: convert to try: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
                 BufferedReader reader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(isocodesJsonPath)));
                 CountriesVocabulary isocodesCountriesJson = gson.fromJson(reader, CountriesVocabulary.class);
                 reader.close();
