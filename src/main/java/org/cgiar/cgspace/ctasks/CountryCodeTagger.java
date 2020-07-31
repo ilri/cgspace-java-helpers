@@ -19,6 +19,7 @@
 package org.cgiar.cgspace.ctasks;
 
 import com.google.gson.Gson;
+import org.dspace.authorize.AuthorizeException;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
 import org.dspace.content.Metadatum;
@@ -30,8 +31,10 @@ import org.dspace.curate.Curator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 public class CountryCodeTagger extends AbstractCurationTask
 {
@@ -45,6 +48,8 @@ public class CountryCodeTagger extends AbstractCurationTask
     private static String iso3166Alpha2Field;
 
     private List<String> results = new ArrayList<String>();
+
+    private static Logger log = Logger.getLogger(CountryCodeTagger.class);
 
     @Override
     public int perform(DSpaceObject dso) throws IOException
@@ -60,14 +65,12 @@ public class CountryCodeTagger extends AbstractCurationTask
             Item item = (Item)dso;
             String itemHandle = item.getHandle();
 
-            // Always succeed?
-            status = Curator.CURATE_SUCCESS;
-
             Metadatum[] itemCountries = item.getMetadataByMetadataString(iso3166Field);
 
             // skip items that don't have country metadata
             if (itemCountries.length == 0) {
                 result = itemHandle + ": no countries, skipping.";
+                status = Curator.CURATE_SKIP;
             } else {
                 Gson gson = new Gson();
 
@@ -79,21 +82,41 @@ public class CountryCodeTagger extends AbstractCurationTask
                 reader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(cgspaceCountriesJsonPath)));
                 CountriesVocabulary cgspaceCountriesJson = gson.fromJson(reader, CountriesVocabulary.class);
                 reader.close();
-                
-                System.out.println(isocodesCountriesJson.getClass());
-                System.out.println(cgspaceCountriesJson.getClass());
 
-                for (CountriesVocabulary.Country country : isocodesCountriesJson.countries) {
-                    System.out.println(country.getName());
-                }
-
-                result = itemHandle + ": " + itemCountries.length + " countries possibly need tagging";
+                //System.out.println(itemHandle + ": " + itemCountries.length + " countries possibly need tagging");
 
                 // check the item's country codes, if any
                 Metadatum[] itemAlpha2CountryCodes = item.getMetadataByMetadataString(iso3166Alpha2Field);
 
                 if (itemAlpha2CountryCodes.length == 0) {
-                    System.out.println(itemHandle + ": Should add codes for " + itemCountries.length + " countries.");
+                    //System.out.println(itemHandle + ": Should add codes for " + itemCountries.length + " countries.");
+
+                    Integer addedCodeCount = 0;
+                    for (Metadatum itemCountry : itemCountries) {
+                        for (CountriesVocabulary.Country country : isocodesCountriesJson.countries) {
+                            if (itemCountry.value.equalsIgnoreCase(country.getName()) || itemCountry.value.equalsIgnoreCase(country.getOfficialName()) || itemCountry.value.equalsIgnoreCase(country.getCommonName())) {
+                                System.out.println(itemHandle + ": adding country code " + country.getAlpha_2());
+
+                                try {
+                                    // we have the field as a string, so we need to split/tokenize it here actually
+                                    item.addMetadata("cg", "coverage", "iso3166-alpha2", "en_US", country.getAlpha_2());
+                                    item.update();
+
+                                    addedCodeCount++;
+
+                                    result = itemHandle + ": added " + addedCodeCount + " country code(s)";
+                                    status = Curator.CURATE_SUCCESS;
+                                } catch (SQLException | AuthorizeException sqle) {
+                                    log.debug(sqle.getMessage());
+                                    result = itemHandle + ": error";
+                                    status = Curator.CURATE_ERROR;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    result = itemHandle + ": oh snap, we have countries and codes... not sure what to do";
+                    status = Curator.CURATE_SUCCESS;
                 }
             }
 
