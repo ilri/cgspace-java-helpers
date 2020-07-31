@@ -72,7 +72,7 @@ public class CountryCodeTagger extends AbstractCurationTask
             } else {
                 Gson gson = new Gson();
 
-                BufferedReader reader = new BufferedReader(new FileReader(isocodesJsonPath));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(isocodesJsonPath)));
                 CountriesVocabulary isocodesCountriesJson = gson.fromJson(reader, CountriesVocabulary.class);
                 reader.close();
 
