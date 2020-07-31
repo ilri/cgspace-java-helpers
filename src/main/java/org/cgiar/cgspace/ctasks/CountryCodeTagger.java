@@ -19,7 +19,6 @@
 package org.cgiar.cgspace.ctasks;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
 import org.dspace.content.Metadatum;
