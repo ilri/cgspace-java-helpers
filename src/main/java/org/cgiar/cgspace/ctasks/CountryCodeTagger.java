@@ -94,14 +94,6 @@ public class CountryCodeTagger extends AbstractCurationTask
                 if (itemAlpha2CountryCodes.length == 0) {
                     System.out.println(itemHandle + ": Should add codes for " + itemCountries.length + " countries.");
                 }
-                
-                /*Country kenya = new Country("Kenya", null, "Republic of Kenya", 404, "KE", "KEN");
-                Country afghanistan = new Country("Afghanistan", null, "Islamic Republic of Afghanistan", 024, "AF", "AFG");
-
-                Map<Integer, Country> countries =  new HashMap<>();
-                
-                countries.put(kenya.getNumeric(), kenya);
-                countries.put(afghanistan.getNumeric(), afghanistan);*/
             }
 
             setResult(result);

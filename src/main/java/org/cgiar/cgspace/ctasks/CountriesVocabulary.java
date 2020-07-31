@@ -23,7 +23,7 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class CountriesVocabulary {
-    @SerializedName("3166-1") List<Country> countries;            //required
+    @SerializedName("3166-1") List<Country> countries;
 
     class Country {
         private String name;            //required
