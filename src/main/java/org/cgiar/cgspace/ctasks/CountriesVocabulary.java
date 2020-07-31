@@ -20,9 +20,10 @@ package org.cgiar.cgspace.ctasks;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
 public class CountriesVocabulary {
-    List<Country> countries;            //required
+    @SerializedName("3166-1") List<Country> countries;            //required
 
     class Country {
         private String name;            //required

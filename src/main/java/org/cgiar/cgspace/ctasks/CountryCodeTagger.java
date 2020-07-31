@@ -82,7 +82,7 @@ public class CountryCodeTagger extends AbstractCurationTask
                 System.out.println(isocodesCountriesJson.getClass());
                 System.out.println(cgspaceCountriesJson.getClass());
 
-                for (CountriesVocabulary.Country country : cgspaceCountriesJson.countries) {
+                for (CountriesVocabulary.Country country : isocodesCountriesJson.countries) {
                     System.out.println(country.getName());
                 }
 
