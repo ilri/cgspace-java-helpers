@@ -79,6 +79,7 @@ public class CountryCodeTagger extends AbstractCurationTask
 
                 reader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(cgspaceCountriesJsonPath)));
                 CountriesVocabulary cgspaceCountriesJson = gson.fromJson(reader, CountriesVocabulary.class);
+                reader.close();
                 
                 System.out.println(isocodesCountriesJson.getClass());
                 System.out.println(cgspaceCountriesJson.getClass());
