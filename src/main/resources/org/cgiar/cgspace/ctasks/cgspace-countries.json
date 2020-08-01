@@ -13,9 +13,61 @@
       "alpha_2": "PS",
       "alpha_3": "PSE",
       "name": "Palestine State of",
-      "cgspace_name": "Palestine",
+      "cgspace_name": "Palestine, State of",
       "numeric": "275",
       "official_name": "the State of Palestine"
+    },
+    {
+      "alpha_2": "CD",
+      "alpha_3": "COD",
+      "cgspace_name": "Congo, Democratic Republic of",
+      "name": "Congo, The Democratic Republic of the",
+      "numeric": "180"
+    },
+    {
+      "alpha_2": "IR",
+      "alpha_3": "IRN",
+      "name": "Iran, Islamic Republic of",
+      "cgspace_name": "Iran",
+      "numeric": "364",
+      "official_name": "Islamic Republic of Iran"
+    },
+    {
+      "alpha_2": "KP",
+      "alpha_3": "PRK",
+      "name": "Korea, Democratic People's Republic of",
+      "cgspace_name": "Korea, DPR",
+      "numeric": "408",
+      "official_name": "Democratic People's Republic of Korea"
+    },
+    {
+      "alpha_2": "LA",
+      "alpha_3": "LAO",
+      "name": "Lao People's Democratic Republic",
+      "cgspace_name": "Laos",
+      "numeric": "418"
+    },
+    {
+      "alpha_2": "FM",
+      "alpha_3": "FSM",
+      "name": "Micronesia, Federated States of",
+      "cgspace_name": "Micronesia",
+      "numeric": "583",
+      "official_name": "Federated States of Micronesia"
+    },
+    {
+      "alpha_2": "RU",
+      "alpha_3": "RUS",
+      "name": "Russian Federation",
+      "cgspace_name": "Russia",
+      "numeric": "643"
+    },
+    {
+      "alpha_2": "SY",
+      "alpha_3": "SYR",
+      "name": "Syrian Arab Republic",
+      "cgspace_name": "Syria",
+      "numeric": "760"
     }
   ]
 }
