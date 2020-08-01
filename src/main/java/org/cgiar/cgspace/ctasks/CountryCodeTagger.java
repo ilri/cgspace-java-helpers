@@ -93,9 +93,6 @@ public class CountryCodeTagger extends AbstractCurationTask
 
                     // split the alpha2 country code field into schema, element, and qualifier so we can use it with item.addMetadata()
                     String[] iso3166Alpha2FieldParts = iso3166Alpha2Field.split("\\.");
-                    System.out.println("schema:" + iso3166Alpha2FieldParts[0]);
-                    System.out.println("element:" + iso3166Alpha2FieldParts[1]);
-                    System.out.println("qualifier:" + iso3166Alpha2FieldParts[2]);
 
                     Integer addedCodeCount = 0;
                     for (Metadatum itemCountry : itemCountries) {
@@ -105,8 +102,7 @@ public class CountryCodeTagger extends AbstractCurationTask
                                 System.out.println(itemHandle + ": adding country code " + country.getAlpha_2());
 
                                 try {
-                                    // we have the field as a string, so we need to split/tokenize it here actually
-                                    item.addMetadata("cg", "coverage", "iso3166-alpha2", "en_US", country.getAlpha_2());
+                                    item.addMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], "en_US", country.getAlpha_2());
                                     item.update();
 
                                     addedCodeCount++;
@@ -127,7 +123,7 @@ public class CountryCodeTagger extends AbstractCurationTask
 
                                 try {
                                     // we have the field as a string, so we need to split/tokenize it here actually
-                                    item.addMetadata("cg", "coverage", "iso3166-alpha2", "en_US", country.getAlpha_2());
+                                    item.addMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], "en_US", country.getAlpha_2());
                                     item.update();
 
                                     addedCodeCount++;
