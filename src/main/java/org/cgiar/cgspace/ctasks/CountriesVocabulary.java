@@ -19,12 +19,8 @@
 package org.cgiar.cgspace.ctasks;
 
 import javax.annotation.Nullable;
-import java.util.List;
-import com.google.gson.annotations.SerializedName;
 
 public class CountriesVocabulary {
-    // support reading iso_3166-1.json from Debian's iso-codes package using SerializedName since our class needs to match the JSON exactly
-    @SerializedName("3166-1") List<Country> countries;
 
     class Country {
         private String name;            //required
