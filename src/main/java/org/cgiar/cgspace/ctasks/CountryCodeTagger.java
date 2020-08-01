@@ -24,7 +24,6 @@ import org.dspace.authorize.AuthorizeException;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
 import org.dspace.content.Metadatum;
-import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Constants;
 import org.dspace.curate.AbstractCurationTask;
 import org.dspace.curate.Curator;
@@ -41,11 +40,11 @@ public class CountryCodeTagger extends AbstractCurationTask
     private int status = Curator.CURATE_UNSET;
     private String result = null;
 
-    private static final String PLUGIN_PREFIX = "ilri";
     private static String isocodesJsonPath;
     private static String cgspaceCountriesJsonPath;
     private static String iso3166Field;
     private static String iso3166Alpha2Field;
+    private static boolean forceupdate;
 
     private List<String> results = new ArrayList<String>();
 
@@ -57,8 +56,9 @@ public class CountryCodeTagger extends AbstractCurationTask
         // Load configuration
         isocodesJsonPath = "/org/cgiar/cgspace/ctasks/iso_3166-1.json";
         cgspaceCountriesJsonPath = "/org/cgiar/cgspace/ctasks/cgspace-countries.json";
-        iso3166Field = ConfigurationManager.getProperty(PLUGIN_PREFIX, "countrycodes.iso3166.field");
-        iso3166Alpha2Field = ConfigurationManager.getProperty(PLUGIN_PREFIX, "countrycodes.iso3166-alpha2.field");
+        iso3166Field = taskProperty("iso3166.field");
+        iso3166Alpha2Field = taskProperty("iso3166-alpha2.field");
+        forceupdate = taskBooleanProperty("forceupdate", false);
 
 		if (dso.getType() == Constants.ITEM)
         {
@@ -85,14 +85,18 @@ public class CountryCodeTagger extends AbstractCurationTask
 
                 //System.out.println(itemHandle + ": " + itemCountries.length + " countries possibly need tagging");
 
+                // split the alpha2 country code field into schema, element, and qualifier so we can use it with item.addMetadata()
+                String[] iso3166Alpha2FieldParts = iso3166Alpha2Field.split("\\.");
+
+                if (forceupdate) {
+                    item.clearMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], Item.ANY);
+                }
+
                 // check the item's country codes, if any
                 Metadatum[] itemAlpha2CountryCodes = item.getMetadataByMetadataString(iso3166Alpha2Field);
 
                 if (itemAlpha2CountryCodes.length == 0) {
                     //System.out.println(itemHandle + ": Should add codes for " + itemCountries.length + " countries.");
-
-                    // split the alpha2 country code field into schema, element, and qualifier so we can use it with item.addMetadata()
-                    String[] iso3166Alpha2FieldParts = iso3166Alpha2Field.split("\\.");
 
                     Integer addedCodeCount = 0;
                     for (Metadatum itemCountry : itemCountries) {
