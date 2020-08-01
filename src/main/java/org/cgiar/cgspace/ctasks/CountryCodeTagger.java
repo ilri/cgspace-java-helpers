@@ -143,8 +143,8 @@ public class CountryCodeTagger extends AbstractCurationTask
                         }
                     }
                 } else {
-                    result = itemHandle + ": oh snap, we have countries and codes... not sure what to do";
-                    status = Curator.CURATE_SUCCESS;
+                    result = itemHandle + ": item has country codes, skipping";
+                    status = Curator.CURATE_SKIP;
                 }
             }
 
