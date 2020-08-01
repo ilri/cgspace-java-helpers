@@ -31,8 +31,8 @@ public class CountriesVocabulary {
         private String common_name;     //optional
         private String official_name;   //optional
         private String numeric;         //required Hmmmm need to cast this...
-        private String alpha_2;          //required
-        private String alpha_3;          //required
+        private String alpha_2;         //required
+        private String alpha_3;         //required
 
         public Country(String name,
                        @Nullable String common_name,
