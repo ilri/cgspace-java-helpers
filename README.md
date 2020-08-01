@@ -14,6 +14,8 @@ $ mvn -B archetype:generate -DgroupId=org.cgiar.cgspace.ctasks -DartifactId=dspa
 
 ## Todo
 
+- Add support for profiles so we can "force" re-tagging of all
+- Integrate with main DSpace build
 - Port to DSpace 6
   - Remember to bump Gson version!
 
