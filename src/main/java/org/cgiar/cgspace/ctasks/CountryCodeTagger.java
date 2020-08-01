@@ -94,7 +94,7 @@ public class CountryCodeTagger extends AbstractCurationTask
                     Integer addedCodeCount = 0;
                     for (Metadatum itemCountry : itemCountries) {
                         for (CountriesVocabulary.Country country : isocodesCountriesJson.countries) {
-                            if (itemCountry.value.equalsIgnoreCase(country.getName()) || itemCountry.value.equalsIgnoreCase(country.getOfficialName()) || itemCountry.value.equalsIgnoreCase(country.getCommonName())) {
+                            if (itemCountry.value.equalsIgnoreCase(country.getName()) || itemCountry.value.equalsIgnoreCase(country.get_official_name()) || itemCountry.value.equalsIgnoreCase(country.get_common_name())) {
                                 System.out.println(itemHandle + ": adding country code " + country.getAlpha_2());
 
                                 try {

@@ -28,21 +28,21 @@ public class CountriesVocabulary {
 
     class Country {
         private String name;            //required
-        private String commonName;      //optional
-        private String officialName;    //optional
+        private String common_name;     //optional
+        private String official_name;   //optional
         private String numeric;         //required Hmmmm need to cast this...
         private String alpha_2;          //required
         private String alpha_3;          //required
 
         public Country(String name,
-                       @Nullable String commonName,
-                       @Nullable String officialName,
+                       @Nullable String common_name,
+                       @Nullable String official_name,
                        String numeric,
                        String alpha_2,
                        String alpha_3) {
             this.name = name;
-            this.commonName = commonName;
-            this.officialName = officialName;
+            this.common_name = common_name;
+            this.official_name = official_name;
             this.numeric = numeric; // fuuuuu this is a string and we can't cast to Integer because some values are zeropadded like "004"
             this.alpha_2 = alpha_2;
             this.alpha_3 = alpha_3;
@@ -56,12 +56,12 @@ public class CountriesVocabulary {
             return numeric;
         }
 
-        public String getCommonName() {
-            return commonName;
+        public String get_common_name() {
+            return common_name;
         }
 
-        public String getOfficialName() {
-            return officialName;
+        public String get_official_name() {
+            return official_name;
         }
 
         public String getAlpha_2() {
