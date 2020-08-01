@@ -12,6 +12,11 @@ This project was initially created according to the [Maven Getting Started Guide
 $ mvn -B archetype:generate -DgroupId=org.cgiar.cgspace.ctasks -DartifactId=dspace-curation-tasks -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
 ```
 
+## Todo
+
+- Port to DSpace 6
+  - Remember to bump Gson version!
+
 ## License
 This work is licensed under the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
