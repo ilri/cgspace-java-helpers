@@ -14,7 +14,6 @@ $ mvn -B archetype:generate -DgroupId=org.cgiar.cgspace.ctasks -DartifactId=dspa
 
 ## Todo
 
-- Add support for profiles so we can "force" re-tagging of all
 - Integrate with main DSpace build
 - Make sure this doesn't work on items in the workflow
 - Port to DSpace 6
