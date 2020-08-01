@@ -19,6 +19,7 @@
 package org.cgiar.cgspace.ctasks;
 
 import com.google.gson.Gson;
+import org.apache.log4j.Logger;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
@@ -34,7 +35,6 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.log4j.Logger;
 
 public class CountryCodeTagger extends AbstractCurationTask
 {
