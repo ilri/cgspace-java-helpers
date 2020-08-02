@@ -18,6 +18,8 @@ $ mvn -B archetype:generate -DgroupId=org.cgiar.cgspace.ctasks -DartifactId=dspa
 - Make sure this doesn't work on items in the workflow
 - Port to DSpace 6
   - Remember to bump Gson version!
+- Check for existence of metadata field before trying to add metadata
+- Add tests
 
 ## License
 This work is licensed under the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html).
