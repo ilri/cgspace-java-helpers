@@ -37,121 +37,149 @@ import java.util.List;
 
 public class CountryCodeTagger extends AbstractCurationTask
 {
-    private int status = Curator.CURATE_UNSET;
-    private String result = null;
+    public class CountryCodeTaggerConfig {
+        private final String isocodesJsonPath = "/org/cgiar/cgspace/ctasks/iso_3166-1.json";
+        private final String cgspaceCountriesJsonPath = "/org/cgiar/cgspace/ctasks/cgspace-countries.json";
+        private final String iso3166Field = taskProperty("iso3166.field");
+        private final String iso3166Alpha2Field = taskProperty("iso3166-alpha2.field");
+        private final boolean forceupdate = taskBooleanProperty("forceupdate", false);
 
-    private static String isocodesJsonPath;
-    private static String cgspaceCountriesJsonPath;
-    private static String iso3166Field;
-    private static String iso3166Alpha2Field;
-    private static boolean forceupdate;
+        private List<String> results = new ArrayList<String>();
 
-    private List<String> results = new ArrayList<String>();
+        private Logger log = Logger.getLogger(CountryCodeTagger.class);
+    }
 
-    private static Logger log = Logger.getLogger(CountryCodeTagger.class);
+    public class CountryCodeTaggerResult {
+        private int status = Curator.CURATE_UNSET;
+        private String result = null;
+
+        public int getStatus() {
+            return status;
+        }
+
+        public void setStatus(int status) {
+            this.status = status;
+        }
+
+        public String getResult() {
+            return result;
+        }
+
+        public void setResult(String result) {
+            this.result = result;
+        }
+    }
 
     @Override
     public int perform(DSpaceObject dso) throws IOException
     {
-        // Load configuration
-        isocodesJsonPath = "/org/cgiar/cgspace/ctasks/iso_3166-1.json";
-        cgspaceCountriesJsonPath = "/org/cgiar/cgspace/ctasks/cgspace-countries.json";
-        iso3166Field = taskProperty("iso3166.field");
-        iso3166Alpha2Field = taskProperty("iso3166-alpha2.field");
-        forceupdate = taskBooleanProperty("forceupdate", false);
+        // gotta define this here so we can access it after the if context...
+        CountryCodeTaggerResult alpha2Result = new CountryCodeTaggerResult();
 
 		if (dso.getType() == Constants.ITEM)
         {
+            // Load configuration
+            CountryCodeTaggerConfig config = new CountryCodeTaggerConfig();
+
             Item item = (Item)dso;
-            String itemHandle = item.getHandle();
 
-            Metadatum[] itemCountries = item.getMetadataByMetadataString(iso3166Field);
+            alpha2Result = performAlpha2(item, config);
 
-            // skip items that don't have country metadata
-            if (itemCountries.length == 0) {
-                result = itemHandle + ": no countries, skipping.";
-                status = Curator.CURATE_SKIP;
-            } else {
-                Gson gson = new Gson();
+            setResult(alpha2Result.getResult());
+            report(alpha2Result.getResult());
+		}
 
-                // TODO: convert to try: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
-                BufferedReader reader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(isocodesJsonPath)));
-                ISO3166CountriesVocabulary isocodesCountriesJson = gson.fromJson(reader, ISO3166CountriesVocabulary.class);
-                reader.close();
+		return alpha2Result.getStatus();
+    }
 
-                reader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(cgspaceCountriesJsonPath)));
-                CGSpaceCountriesVocabulary cgspaceCountriesJson = gson.fromJson(reader, CGSpaceCountriesVocabulary.class);
-                reader.close();
+    public CountryCodeTaggerResult performAlpha2(Item item, CountryCodeTaggerConfig config) throws IOException
+    {
+        CountryCodeTaggerResult alpha2Result = new CountryCodeTaggerResult();
+        String itemHandle = item.getHandle();
 
-                //System.out.println(itemHandle + ": " + itemCountries.length + " countries possibly need tagging");
+        Metadatum[] itemCountries = item.getMetadataByMetadataString(config.iso3166Field);
 
-                // split the alpha2 country code field into schema, element, and qualifier so we can use it with item.addMetadata()
-                String[] iso3166Alpha2FieldParts = iso3166Alpha2Field.split("\\.");
+        // skip items that don't have country metadata
+        if (itemCountries.length == 0) {
+            alpha2Result.setResult(itemHandle + ": no countries, skipping.");
+            alpha2Result.setStatus(Curator.CURATE_SKIP);
+        } else {
+            Gson gson = new Gson();
 
-                if (forceupdate) {
-                    item.clearMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], Item.ANY);
-                }
+            // TODO: convert to try: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
+            BufferedReader reader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(config.isocodesJsonPath)));
+            ISO3166CountriesVocabulary isocodesCountriesJson = gson.fromJson(reader, ISO3166CountriesVocabulary.class);
+            reader.close();
 
-                // check the item's country codes, if any
-                Metadatum[] itemAlpha2CountryCodes = item.getMetadataByMetadataString(iso3166Alpha2Field);
+            reader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(config.cgspaceCountriesJsonPath)));
+            CGSpaceCountriesVocabulary cgspaceCountriesJson = gson.fromJson(reader, CGSpaceCountriesVocabulary.class);
+            reader.close();
 
-                if (itemAlpha2CountryCodes.length == 0) {
-                    //System.out.println(itemHandle + ": Should add codes for " + itemCountries.length + " countries.");
+            //System.out.println(itemHandle + ": " + itemCountries.length + " countries possibly need tagging");
 
-                    Integer addedCodeCount = 0;
-                    for (Metadatum itemCountry : itemCountries) {
-                        //check ISO 3166-1 countries
-                        for (CountriesVocabulary.Country country : isocodesCountriesJson.countries) {
-                            if (itemCountry.value.equalsIgnoreCase(country.getName()) || itemCountry.value.equalsIgnoreCase(country.get_official_name()) || itemCountry.value.equalsIgnoreCase(country.get_common_name())) {
-                                System.out.println(itemHandle + ": adding country code " + country.getAlpha_2());
+            // split the alpha2 country code field into schema, element, and qualifier so we can use it with item.addMetadata()
+            String[] iso3166Alpha2FieldParts = config.iso3166Alpha2Field.split("\\.");
 
-                                try {
-                                    item.addMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], "en_US", country.getAlpha_2());
-                                    item.update();
+            if (config.forceupdate) {
+                item.clearMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], Item.ANY);
+            }
 
-                                    addedCodeCount++;
+            // check the item's country codes, if any
+            Metadatum[] itemAlpha2CountryCodes = item.getMetadataByMetadataString(config.iso3166Alpha2Field);
 
-                                    result = itemHandle + ": added " + addedCodeCount + " country code(s)";
-                                    status = Curator.CURATE_SUCCESS;
-                                } catch (SQLException | AuthorizeException sqle) {
-                                    log.debug(sqle.getMessage());
-                                    result = itemHandle + ": error";
-                                    status = Curator.CURATE_ERROR;
-                                }
-                            }
-                        }
-                        //check CGSpace countries
-                        for (CountriesVocabulary.Country country : cgspaceCountriesJson.countries) {
-                            if (itemCountry.value.equalsIgnoreCase(country.getCgspace_name())) {
-                                System.out.println(itemHandle + ": adding country code " + country.getAlpha_2());
+            if (itemAlpha2CountryCodes.length == 0) {
+                //System.out.println(itemHandle + ": Should add codes for " + itemCountries.length + " countries.");
 
-                                try {
-                                    // we have the field as a string, so we need to split/tokenize it here actually
-                                    item.addMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], "en_US", country.getAlpha_2());
-                                    item.update();
+                int addedCodeCount = 0;
+                for (Metadatum itemCountry : itemCountries) {
+                    //check ISO 3166-1 countries
+                    for (CountriesVocabulary.Country country : isocodesCountriesJson.countries) {
+                        if (itemCountry.value.equalsIgnoreCase(country.getName()) || itemCountry.value.equalsIgnoreCase(country.get_official_name()) || itemCountry.value.equalsIgnoreCase(country.get_common_name())) {
+                            System.out.println(itemHandle + ": adding country code " + country.getAlpha_2());
 
-                                    addedCodeCount++;
+                            try {
+                                item.addMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], "en_US", country.getAlpha_2());
+                                item.update();
 
-                                    result = itemHandle + ": added " + addedCodeCount + " country code(s)";
-                                    status = Curator.CURATE_SUCCESS;
-                                } catch (SQLException | AuthorizeException sqle) {
-                                    log.debug(sqle.getMessage());
-                                    result = itemHandle + ": error";
-                                    status = Curator.CURATE_ERROR;
-                                }
+                                addedCodeCount++;
+
+                                alpha2Result.setResult(itemHandle + ": added " + addedCodeCount + " country code(s)");
+                                alpha2Result.setStatus(Curator.CURATE_SUCCESS);
+                            } catch (SQLException | AuthorizeException sqle) {
+                                config.log.debug(sqle.getMessage());
+                                alpha2Result.setResult(itemHandle + ": error");
+                                alpha2Result.setStatus(Curator.CURATE_ERROR);
                             }
                         }
                     }
-                } else {
-                    result = itemHandle + ": item has country codes, skipping";
-                    status = Curator.CURATE_SKIP;
+                    //check CGSpace countries
+                    for (CountriesVocabulary.Country country : cgspaceCountriesJson.countries) {
+                        if (itemCountry.value.equalsIgnoreCase(country.getCgspace_name())) {
+                            System.out.println(itemHandle + ": adding country code " + country.getAlpha_2());
+
+                            try {
+                                // we have the field as a string, so we need to split/tokenize it here actually
+                                item.addMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], "en_US", country.getAlpha_2());
+                                item.update();
+
+                                addedCodeCount++;
+
+                                alpha2Result.setResult(itemHandle + ": added " + addedCodeCount + " country code(s)");
+                                alpha2Result.setStatus(Curator.CURATE_SUCCESS);
+                            } catch (SQLException | AuthorizeException sqle) {
+                                config.log.debug(sqle.getMessage());
+                                alpha2Result.setResult(itemHandle + ": error");
+                                alpha2Result.setStatus(Curator.CURATE_ERROR);
+                            }
+                        }
+                    }
                 }
+            } else {
+                alpha2Result.setResult(itemHandle + ": item has country codes, skipping");
+                alpha2Result.setStatus(Curator.CURATE_SKIP);
             }
+        }
 
-            setResult(result);
-            report(result);
-		}
-
-        return status;
+        return alpha2Result;
     }
 }
