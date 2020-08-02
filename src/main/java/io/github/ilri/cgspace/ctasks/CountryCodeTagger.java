@@ -16,7 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-package org.cgiar.cgspace.ctasks;
+package io.github.ilri.cgspace.ctasks;
 
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
@@ -38,8 +38,8 @@ import java.util.List;
 public class CountryCodeTagger extends AbstractCurationTask
 {
     public class CountryCodeTaggerConfig {
-        private final String isocodesJsonPath = "/org/cgiar/cgspace/ctasks/iso_3166-1.json";
-        private final String cgspaceCountriesJsonPath = "/org/cgiar/cgspace/ctasks/cgspace-countries.json";
+        private final String isocodesJsonPath = "/io/github/ilri/cgspace/ctasks/iso_3166-1.json";
+        private final String cgspaceCountriesJsonPath = "/io/github/ilri/cgspace/ctasks/cgspace-countries.json";
         private final String iso3166Field = taskProperty("iso3166.field");
         private final String iso3166Alpha2Field = taskProperty("iso3166-alpha2.field");
         private final boolean forceupdate = taskBooleanProperty("forceupdate", false);

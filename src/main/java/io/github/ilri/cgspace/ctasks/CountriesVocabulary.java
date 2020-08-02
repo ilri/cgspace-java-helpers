@@ -16,7 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-package org.cgiar.cgspace.ctasks;
+package io.github.ilri.cgspace.ctasks;
 
 import javax.annotation.Nullable;
 
