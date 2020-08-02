@@ -1,9 +1,31 @@
 # DSpace Curation Tasks
 Metadata curation tasks used on the [CGSpace](https://cgspace.cgiar.org) institutional repository:
 
-- CountryCodeTagger: tag items with appropriate country codes based on their existing country metadata
+- *CountryCodeTagger*: add ISO 3166-1 Alpha2 country codes to items based on their existing country metadata
 
 Tested on DSpace 5.8. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC5x/Curation+System).
+
+## Build and Install
+To build the standalone jar:
+
+```
+$ mvn package
+```
+
+Copy the resulting jar to the DSpace `lib` directory:
+
+```
+$ cp target/dspace-curation-tasks-1.0-SNAPSHOT.jar ~/dspace/lib/dspace-curation-tasks-1.0-SNAPSHOT.jar
+```
+
+## Invocation
+Once the jar is installed and you have added appropriate configuration in `~/dspace/config/modules`:
+
+```
+$ ~/dspace/bin/dspace curate -t countrycodetagger -i 10568/3 -r - -l 500 -s object
+```
+
+_Note_: it is very important to set the cache limit (`-l`) and the database transaction scope to something sensible (`object`) if you're curating a community or collection with more than a few hundred items.
 
 ## Notes
 This project was initially created according to the [Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/):
