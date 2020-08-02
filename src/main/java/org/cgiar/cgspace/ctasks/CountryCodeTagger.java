@@ -115,8 +115,6 @@ public class CountryCodeTagger extends AbstractCurationTask
             CGSpaceCountriesVocabulary cgspaceCountriesJson = gson.fromJson(reader, CGSpaceCountriesVocabulary.class);
             reader.close();
 
-            //System.out.println(itemHandle + ": " + itemCountries.length + " countries possibly need tagging");
-
             // split the alpha2 country code field into schema, element, and qualifier so we can use it with item.addMetadata()
             String[] iso3166Alpha2FieldParts = config.iso3166Alpha2Field.split("\\.");
 
@@ -128,15 +126,11 @@ public class CountryCodeTagger extends AbstractCurationTask
             Metadatum[] itemAlpha2CountryCodes = item.getMetadataByMetadataString(config.iso3166Alpha2Field);
 
             if (itemAlpha2CountryCodes.length == 0) {
-                //System.out.println(itemHandle + ": Should add codes for " + itemCountries.length + " countries.");
-
                 int addedCodeCount = 0;
                 for (Metadatum itemCountry : itemCountries) {
                     //check ISO 3166-1 countries
                     for (CountriesVocabulary.Country country : isocodesCountriesJson.countries) {
                         if (itemCountry.value.equalsIgnoreCase(country.getName()) || itemCountry.value.equalsIgnoreCase(country.get_official_name()) || itemCountry.value.equalsIgnoreCase(country.get_common_name())) {
-                            System.out.println(itemHandle + ": adding country code " + country.getAlpha_2());
-
                             try {
                                 item.addMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], "en_US", country.getAlpha_2());
                                 item.update();
@@ -155,8 +149,6 @@ public class CountryCodeTagger extends AbstractCurationTask
                     //check CGSpace countries
                     for (CountriesVocabulary.Country country : cgspaceCountriesJson.countries) {
                         if (itemCountry.value.equalsIgnoreCase(country.getCgspace_name())) {
-                            System.out.println(itemHandle + ": adding country code " + country.getAlpha_2());
-
                             try {
                                 // we have the field as a string, so we need to split/tokenize it here actually
                                 item.addMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], "en_US", country.getAlpha_2());
