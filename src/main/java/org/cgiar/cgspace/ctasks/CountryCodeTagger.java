@@ -44,8 +44,6 @@ public class CountryCodeTagger extends AbstractCurationTask
         private final String iso3166Alpha2Field = taskProperty("iso3166-alpha2.field");
         private final boolean forceupdate = taskBooleanProperty("forceupdate", false);
 
-        private List<String> results = new ArrayList<String>();
-
         private Logger log = Logger.getLogger(CountryCodeTagger.class);
     }
 
