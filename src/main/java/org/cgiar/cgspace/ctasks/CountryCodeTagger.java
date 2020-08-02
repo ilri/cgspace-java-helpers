@@ -126,46 +126,39 @@ public class CountryCodeTagger extends AbstractCurationTask
             Metadatum[] itemAlpha2CountryCodes = item.getMetadataByMetadataString(config.iso3166Alpha2Field);
 
             if (itemAlpha2CountryCodes.length == 0) {
-                int addedCodeCount = 0;
+                List<String> newAlpha2Codes = new ArrayList<String>();
                 for (Metadatum itemCountry : itemCountries) {
                     //check ISO 3166-1 countries
                     for (CountriesVocabulary.Country country : isocodesCountriesJson.countries) {
                         if (itemCountry.value.equalsIgnoreCase(country.getName()) || itemCountry.value.equalsIgnoreCase(country.get_official_name()) || itemCountry.value.equalsIgnoreCase(country.get_common_name())) {
-                            try {
-                                item.addMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], "en_US", country.getAlpha_2());
-                                item.update();
-
-                                addedCodeCount++;
-
-                                alpha2Result.setResult(itemHandle + ": added " + addedCodeCount + " country code(s)");
-                                alpha2Result.setStatus(Curator.CURATE_SUCCESS);
-                            } catch (SQLException | AuthorizeException sqle) {
-                                config.log.debug(sqle.getMessage());
-                                alpha2Result.setResult(itemHandle + ": error");
-                                alpha2Result.setStatus(Curator.CURATE_ERROR);
-                            }
+                            newAlpha2Codes.add(country.getAlpha_2());
                         }
                     }
+
                     //check CGSpace countries
                     for (CountriesVocabulary.Country country : cgspaceCountriesJson.countries) {
                         if (itemCountry.value.equalsIgnoreCase(country.getCgspace_name())) {
-                            try {
-                                // we have the field as a string, so we need to split/tokenize it here actually
-                                item.addMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], "en_US", country.getAlpha_2());
-                                item.update();
-
-                                addedCodeCount++;
-
-                                alpha2Result.setResult(itemHandle + ": added " + addedCodeCount + " country code(s)");
-                                alpha2Result.setStatus(Curator.CURATE_SUCCESS);
-                            } catch (SQLException | AuthorizeException sqle) {
-                                config.log.debug(sqle.getMessage());
-                                alpha2Result.setResult(itemHandle + ": error");
-                                alpha2Result.setStatus(Curator.CURATE_ERROR);
-                            }
+                            newAlpha2Codes.add(country.getAlpha_2());
                         }
                     }
                 }
+
+                if (newAlpha2Codes.size() > 0) {
+                    try {
+                        // add metadata values (casting the List<String> to an array)
+                        item.addMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], "en_US", newAlpha2Codes.toArray(new String[0]));
+                        item.update();
+                    } catch (SQLException | AuthorizeException sqle) {
+                        config.log.debug(sqle.getMessage());
+                        alpha2Result.setResult(itemHandle + ": error");
+                        alpha2Result.setStatus(Curator.CURATE_ERROR);
+                    }
+
+                    alpha2Result.setResult(itemHandle + ": added " + newAlpha2Codes.size() + " alpha2 country code(s)");
+                } else {
+                    alpha2Result.setResult(itemHandle + ": no matching countries found");
+                }
+                alpha2Result.setStatus(Curator.CURATE_SUCCESS);
             } else {
                 alpha2Result.setResult(itemHandle + ": item has country codes, skipping");
                 alpha2Result.setStatus(Curator.CURATE_SKIP);
