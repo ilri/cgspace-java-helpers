@@ -31,7 +31,7 @@ _Note_: it is very important to set the cache limit (`-l`) and the database tran
 This project was initially created according to the [Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/):
 
 ```console
-$ mvn -B archetype:generate -DgroupId=org.cgiar.cgspace.ctasks -DartifactId=dspace-curation-tasks -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
+$ mvn -B archetype:generate -DgroupId=io.github.ilri.cgspace -DartifactId=dspace-curation-tasks -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
 ```
 
 ## Todo
