@@ -36,7 +36,6 @@ $ mvn -B archetype:generate -DgroupId=io.github.ilri.cgspace -DartifactId=dspace
 
 ## Todo
 
-- Integrate with main DSpace build
 - Make sure this doesn't work on items in the workflow
 - Port to DSpace 6
   - Remember to bump Gson version!
