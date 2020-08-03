@@ -1,4 +1,4 @@
-# DSpace Curation Tasks
+# DSpace Curation Tasks [![Build Status](https://travis-ci.org/alanorth/dspace-curation-tasks.svg?branch=master)](https://travis-ci.org/alanorth/dspace-curation-tasks)
 Metadata curation tasks used on the [CGSpace](https://cgspace.cgiar.org) institutional repository:
 
 - **CountryCodeTagger**: add ISO 3166-1 Alpha2 country codes to items based on their existing country metadata
