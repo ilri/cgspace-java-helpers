@@ -10,14 +10,6 @@
       "withdrawal_date": "1997-07-14"
     },
     {
-      "alpha_2": "PS",
-      "alpha_3": "PSE",
-      "name": "Palestine State of",
-      "cgspace_name": "Palestine, State of",
-      "numeric": "275",
-      "official_name": "the State of Palestine"
-    },
-    {
       "alpha_2": "CD",
       "alpha_3": "COD",
       "cgspace_name": "Congo, Democratic Republic of",
