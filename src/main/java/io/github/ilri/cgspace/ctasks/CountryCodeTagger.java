@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
-import org.dspace.content.Metadatum;
+import org.dspace.content.MetadataValue;
 import org.dspace.core.Constants;
 import org.dspace.curate.AbstractCurationTask;
 import org.dspace.curate.Curator;
@@ -81,7 +81,11 @@ public class CountryCodeTagger extends AbstractCurationTask
 
             Item item = (Item)dso;
 
-            alpha2Result = performAlpha2(item, config);
+            try {
+                alpha2Result = performAlpha2(item, config);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
 
             setResult(alpha2Result.getResult());
             report(alpha2Result.getResult());
@@ -90,15 +94,14 @@ public class CountryCodeTagger extends AbstractCurationTask
 		return alpha2Result.getStatus();
     }
 
-    public CountryCodeTaggerResult performAlpha2(Item item, CountryCodeTaggerConfig config) throws IOException
-    {
+    public CountryCodeTaggerResult performAlpha2(Item item, CountryCodeTaggerConfig config) throws IOException, SQLException {
         CountryCodeTaggerResult alpha2Result = new CountryCodeTaggerResult();
         String itemHandle = item.getHandle();
 
-        Metadatum[] itemCountries = item.getMetadataByMetadataString(config.iso3166Field);
+        List<MetadataValue> itemCountries = itemService.getMetadataByMetadataString(item, config.iso3166Field);
 
         // skip items that don't have country metadata
-        if (itemCountries.length == 0) {
+        if (itemCountries.size() == 0) {
             alpha2Result.setResult(itemHandle + ": no countries, skipping.");
             alpha2Result.setStatus(Curator.CURATE_SKIP);
         } else {
@@ -117,25 +120,25 @@ public class CountryCodeTagger extends AbstractCurationTask
             String[] iso3166Alpha2FieldParts = config.iso3166Alpha2Field.split("\\.");
 
             if (config.forceupdate) {
-                item.clearMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], Item.ANY);
+                itemService.clearMetadata(Curator.curationContext(), item, iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], Item.ANY);
             }
 
             // check the item's country codes, if any
-            Metadatum[] itemAlpha2CountryCodes = item.getMetadataByMetadataString(config.iso3166Alpha2Field);
+            List<MetadataValue> itemAlpha2CountryCodes = itemService.getMetadataByMetadataString(item, config.iso3166Alpha2Field);
 
-            if (itemAlpha2CountryCodes.length == 0) {
+            if (itemAlpha2CountryCodes.size() == 0) {
                 List<String> newAlpha2Codes = new ArrayList<String>();
-                for (Metadatum itemCountry : itemCountries) {
+                for (MetadataValue itemCountry : itemCountries) {
                     //check ISO 3166-1 countries
                     for (CountriesVocabulary.Country country : isocodesCountriesJson.countries) {
-                        if (itemCountry.value.equalsIgnoreCase(country.getName()) || itemCountry.value.equalsIgnoreCase(country.get_official_name()) || itemCountry.value.equalsIgnoreCase(country.get_common_name())) {
+                        if (itemCountry.getValue().equalsIgnoreCase(country.getName()) || itemCountry.getValue().equalsIgnoreCase(country.get_official_name()) || itemCountry.getValue().equalsIgnoreCase(country.get_common_name())) {
                             newAlpha2Codes.add(country.getAlpha_2());
                         }
                     }
 
                     //check CGSpace countries
                     for (CountriesVocabulary.Country country : cgspaceCountriesJson.countries) {
-                        if (itemCountry.value.equalsIgnoreCase(country.getCgspace_name())) {
+                        if (itemCountry.getValue().equalsIgnoreCase(country.getCgspace_name())) {
                             newAlpha2Codes.add(country.getAlpha_2());
                         }
                     }
@@ -143,9 +146,8 @@ public class CountryCodeTagger extends AbstractCurationTask
 
                 if (newAlpha2Codes.size() > 0) {
                     try {
-                        // add metadata values (casting the List<String> to an array)
-                        item.addMetadata(iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], "en_US", newAlpha2Codes.toArray(new String[0]));
-                        item.update();
+                        itemService.addMetadata(Curator.curationContext(), item, iso3166Alpha2FieldParts[0], iso3166Alpha2FieldParts[1], iso3166Alpha2FieldParts[2], "en_US", newAlpha2Codes);
+                        itemService.update(Curator.curationContext(), item);
                     } catch (SQLException | AuthorizeException sqle) {
                         config.log.debug(sqle.getMessage());
                         alpha2Result.setResult(itemHandle + ": error");
