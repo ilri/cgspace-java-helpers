@@ -14,7 +14,7 @@ To use these curation tasks in a DSpace project add the following dependency to 
 <dependency>
   <groupId>io.github.ilri.cgspace</groupId>
   <artifactId>dspace-curation-tasks</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>5.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -77,8 +77,6 @@ $ mvn -B archetype:generate -DgroupId=io.github.ilri.cgspace -DartifactId=dspace
 ## TODO
 
 - Make sure this doesn't work on items in the workflow
-- Port to DSpace 6
-  - Remember to bump Gson version!
 - Check for existence of metadata field before trying to add metadata
 - Add tests
 
