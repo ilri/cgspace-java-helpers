@@ -77,8 +77,6 @@ $ mvn -B archetype:generate -DgroupId=io.github.ilri.cgspace -DartifactId=dspace
 ## TODO
 
 - Make sure this doesn't work on items in the workflow
-- Port to DSpace 6
-  - Remember to bump Gson version!
 - Check for existence of metadata field before trying to add metadata
 - Add tests
 
