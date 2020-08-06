@@ -72,32 +72,34 @@ public class FixJpgJpgThumbnails {
 
 	private static void processItem(Item item) throws SQLException, AuthorizeException, IOException {
 		Bundle[] thumbnailBundles = item.getBundles("THUMBNAIL");
-		for (Bundle bundle : thumbnailBundles) {
-			//System.out.println(Arrays.toString(bundle.getItems()));
-			//[org.dspace.content.Item@92944ff4]
-			Bitstream[] bitstreams = bundle.getBitstreams();
-			for (Bitstream bitstream : bitstreams) {
-				//System.out.println(bitstream.getName());
-				//AgricSystems.jpg.jpg
-				if ("image/png".equals(bitstream.getFormat().getMIMEType()) && "Generated Thumbnail".equals(bitstream.getDescription())) {
-					String bitstreamName = bitstream.getName();
-					if (hasJpegThumbnail(thumbnailBundles, bitstreamName)) {
-						bundle.removeBitstream(bitstream);
-						System.out.println("Removed generated PDF thumbnail " + bitstreamName + " from item id=" + item.getID() + ", it has a new JPG thumbnail");
+		for (Bundle thumbnailBundle : thumbnailBundles) {
+			Bitstream[] thumbnailBundleBitstreams = thumbnailBundle.getBitstreams();
+			for (Bitstream thumbnailBitstream : thumbnailBundleBitstreams) {
+				String thumbnailName = thumbnailBitstream.getName();
+
+				if (thumbnailName.contains(".jpg.jpg")) {
+					Bundle[] originalBundles = item.getBundles("ORIGINAL");
+					for (Bundle originalBundle : originalBundles) {
+						Bitstream[] originalBundleBitstreams = originalBundle.getBitstreams();
+
+						for(Bitstream originalBitstream : originalBundleBitstreams) {
+							String originalName = originalBitstream.getName();
+
+							//check if the original file name is the same as the thumbnail name minus the extra ".jpg"
+							if (originalName.equals(StringUtils.removeEndIgnoreCase(thumbnailName, ".jpg")) && "Generated Thumbnail".equals(thumbnailBitstream.getDescription())) {
+								System.out.println(item.getHandle() + ": replacing " + thumbnailName + " with " + originalName);
+
+								//add the original bitstream to the THUMBNAIL bundle
+								thumbnailBundle.addBitstream(originalBitstream);
+								//remove the original bitstream from the ORIGINAL bundle
+								originalBundle.removeBitstream(originalBitstream);
+								//remove the JpgJpg bitstream from the THUMBNAIL bundle
+								thumbnailBundle.removeBitstream(thumbnailBitstream);
+							}
+						}
 					}
 				}
 			}
 		}
-	}
-
-	private static boolean hasJpegThumbnail(Bundle[] thumbnailBundles, String bitstreamName) {
-		String jpgName = StringUtils.removeEndIgnoreCase(bitstreamName, ".png") + ".jpg";
-		for (Bundle bundle : thumbnailBundles) {
-			Bitstream candidate = bundle.getBitstreamByName(jpgName);
-			if (candidate != null) {
-				return true;
-			}
-		}
-		return false;
 	}
 }
