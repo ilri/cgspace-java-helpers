@@ -1,4 +1,4 @@
-package nz.ac.waikato.its.irr.scripts;
+package io.github.ilri.cgspace.scripts;
 
 import org.apache.commons.lang.StringUtils;
 import org.dspace.authorize.AuthorizeException;
@@ -9,12 +9,12 @@ import org.dspace.handle.HandleManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 /**
  * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
+ * @author Alan Orth for the International Livestock Research Institute
  */
-public class RemovePNGThumbnailsForPDFs {
+public class FixJpgJpgThumbnails {
 
 	public static void main(String[] args) {
 		String parentHandle = null;
