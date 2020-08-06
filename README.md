@@ -1,4 +1,4 @@
-# CGSpace Java Helpers [![Build Status](https://travis-ci.org/ilri/cgspace-java-helpers.svg?branch=master)](https://travis-ci.org/ilri/dspace-curation-tasks)
+# CGSpace Java Helpers [![Build Status](https://travis-ci.org/ilri/cgspace-java-helpers.svg?branch=dspace6)](https://travis-ci.org/ilri/dspace-curation-tasks)
 DSpace curation tasks and other Java-based helpers used on the [CGSpace](https://cgspace.cgiar.org) institutional repository:
 
 - **CountryCodeTagger**: add ISO 3166-1 Alpha2 country codes to items based on their existing country metadata
