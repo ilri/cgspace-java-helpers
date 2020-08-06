@@ -79,7 +79,7 @@ public class FixJpgJpgThumbnails {
 			for (Bitstream thumbnailBitstream : thumbnailBundleBitstreams) {
 				String thumbnailName = thumbnailBitstream.getName();
 
-				if (thumbnailName.contains(".jpg.jpg")) {
+				if (thumbnailName.toLowerCase().contains(".jpg.jpg")) {
 					Bundle[] originalBundles = item.getBundles("ORIGINAL");
 					for (Bundle originalBundle : originalBundles) {
 						Bitstream[] originalBundleBitstreams = originalBundle.getBitstreams();
@@ -88,7 +88,7 @@ public class FixJpgJpgThumbnails {
 							String originalName = originalBitstream.getName();
 
 							//check if the original file name is the same as the thumbnail name minus the extra ".jpg"
-							if (originalName.equals(StringUtils.removeEndIgnoreCase(thumbnailName, ".jpg")) && "Generated Thumbnail".equals(thumbnailBitstream.getDescription())) {
+							if (originalName.equalsIgnoreCase(StringUtils.removeEndIgnoreCase(thumbnailName, ".jpg")) && ("Generated Thumbnail".equals(thumbnailBitstream.getDescription()) || "IM Thumbnail".equals(thumbnailBitstream.getDescription()))) {
 								System.out.println(item.getHandle() + ": replacing " + thumbnailName + " with " + originalName);
 
 								//add the original bitstream to the THUMBNAIL bundle
