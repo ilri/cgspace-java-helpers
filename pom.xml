@@ -6,7 +6,7 @@
 
   <groupId>io.github.ilri.cgspace</groupId>
   <artifactId>cgspace-java-helpers</artifactId>
-  <version>5.1-SNAPSHOT</version>
+  <version>5.1</version>
 
   <name>cgspace-java-helpers</name>
   <url>https://github.com/ilri/cgspace-java-helpers</url>
