@@ -13,6 +13,8 @@ import java.sql.SQLException;
 /**
  * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
  * @author Alan Orth for the International Livestock Research Institute
+ * @version 5.1-SNAPSHOT
+ * @since 5.1-SNAPSHOT
  */
 public class FixJpgJpgThumbnails {
 
