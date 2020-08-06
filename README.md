@@ -14,7 +14,7 @@ To use these curation tasks in a DSpace project add the following dependency to 
 <dependency>
   <groupId>io.github.ilri.cgspace</groupId>
   <artifactId>dspace-curation-tasks</artifactId>
-  <version>5.0-SNAPSHOT</version>
+  <version>5.1-SNAPSHOT</version>
 </dependency>
 ```
 
