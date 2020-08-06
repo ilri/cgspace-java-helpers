@@ -1,5 +1,5 @@
-# DSpace Curation Tasks [![Build Status](https://travis-ci.org/ilri/dspace-curation-tasks.svg?branch=master)](https://travis-ci.org/ilri/dspace-curation-tasks)
-Metadata curation tasks used on the [CGSpace](https://cgspace.cgiar.org) institutional repository:
+# CGSpace Java Helpers [![Build Status](https://travis-ci.org/ilri/cgspace-java-helpers.svg?branch=master)](https://travis-ci.org/ilri/dspace-curation-tasks)
+DSpace curation tasks and other Java-based helpers used on the [CGSpace](https://cgspace.cgiar.org) institutional repository:
 
 - **CountryCodeTagger**: add ISO 3166-1 Alpha2 country codes to items based on their existing country metadata
 - **FixJpgJpgThumbnails**: Fix low-quality ".jpg.jpg" thumbnails by replacing them with their originals
@@ -14,7 +14,7 @@ To use these curation tasks in a DSpace project add the following dependency to 
 ```
 <dependency>
   <groupId>io.github.ilri.cgspace</groupId>
-  <artifactId>dspace-curation-tasks</artifactId>
+  <artifactId>cgspace-java-helpers</artifactId>
   <version>5.1-SNAPSHOT</version>
 </dependency>
 ```
@@ -31,7 +31,7 @@ $ mvn package
 Copy the resulting jar to the DSpace `lib` directory:
 
 ```
-$ cp target/dspace-curation-tasks-1.0-SNAPSHOT.jar ~/dspace/lib/dspace-curation-tasks-1.0-SNAPSHOT.jar
+$ cp target/cgspace-java-helpers-5.*-SNAPSHOT.jar ~/dspace/lib
 ```
 
 ## Configuration
@@ -72,7 +72,7 @@ $ ~/dspace/bin/dspace curate -t countrycodetagger -i 10568/3 -r - -l 500 -s obje
 This project was initially created according to the [Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/):
 
 ```console
-$ mvn -B archetype:generate -DgroupId=io.github.ilri.cgspace -DartifactId=dspace-curation-tasks -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
+$ mvn -B archetype:generate -DgroupId=io.github.ilri.cgspace -DartifactId=cgspace-java-helpers -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
 ```
 
 ## TODO
