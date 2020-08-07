@@ -13,7 +13,7 @@ import java.sql.SQLException;
 /**
  * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
  * @author Alan Orth for the International Livestock Research Institute
- * @version 5.3
+ * @version 5.4
  * @since 5.1
  */
 public class FixJpgJpgThumbnails {
@@ -76,10 +76,11 @@ public class FixJpgJpgThumbnails {
 		// Some bitstreams like Infographics are large JPGs and put in the ORIGINAL bundle on purpose so we shouldn't
 		// swap them.
 		Metadatum[] itemTypes = item.getMetadataByMetadataString("dc.type");
-		Boolean itemHasInfographic = false;
+		boolean itemHasInfographic = false;
 		for (Metadatum itemType: itemTypes) {
 			if (itemType.value.equals("Infographic")) {
 				itemHasInfographic = true;
+				break;
 			}
 		}
 
@@ -97,7 +98,7 @@ public class FixJpgJpgThumbnails {
 						for (Bitstream originalBitstream : originalBundleBitstreams) {
 							String originalName = originalBitstream.getName();
 
-							Long originalBitstreamBytes = originalBitstream.getSize();
+							long originalBitstreamBytes = originalBitstream.getSize();
 
 							/*
 							- check if the original file name is the same as the thumbnail name minus the extra ".jpg"
