@@ -2,6 +2,7 @@
 DSpace curation tasks and other Java-based helpers used on the [CGSpace](https://cgspace.cgiar.org) institutional repository:
 
 - **CountryCodeTagger**: add ISO 3166-1 Alpha2 country codes to items based on their existing country metadata
+- **FixJpgJpgThumbnails**: Fix low-quality ".jpg.jpg" thumbnails by replacing them with their originals
 
 Tested on DSpace 6.3. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC5x/Curation+System).
 
@@ -30,7 +31,7 @@ $ mvn package
 Copy the resulting jar to the DSpace `lib` directory:
 
 ```
-$ cp target/cgspace-java-helpers-6.0-SNAPSHOT.jar ~/dspace/lib/cgspace-java-helpers-6.0-SNAPSHOT.jar
+$ cp target/cgspace-java-helpers-6.0-SNAPSHOT.jar ~/dspace/lib/
 ```
 
 ## Configuration
