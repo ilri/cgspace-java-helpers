@@ -1,4 +1,4 @@
-# CGSpace Java Helpers [![Build Status](https://travis-ci.org/ilri/cgspace-java-helpers.svg?branch=dspace6)](https://travis-ci.org/ilri/dspace-curation-tasks)
+# CGSpace Java Helpers [![Build Status](https://travis-ci.org/ilri/cgspace-java-helpers.svg?branch=dspace6)](https://travis-ci.org/ilri/cgspace-java-helpers)
 DSpace curation tasks and other Java-based helpers used on the [CGSpace](https://cgspace.cgiar.org) institutional repository:
 
 - **CountryCodeTagger**: add ISO 3166-1 Alpha2 country codes to items based on their existing country metadata
@@ -30,7 +30,7 @@ $ mvn package
 Copy the resulting jar to the DSpace `lib` directory:
 
 ```
-$ cp target/cgspace-java-helpers-6.0-SNAPSHOT.jar ~/dspace/lib/dspace-curation-tasks-6.0-SNAPSHOT.jar
+$ cp target/cgspace-java-helpers-6.0-SNAPSHOT.jar ~/dspace/lib/cgspace-java-helpers-6.0-SNAPSHOT.jar
 ```
 
 ## Configuration
