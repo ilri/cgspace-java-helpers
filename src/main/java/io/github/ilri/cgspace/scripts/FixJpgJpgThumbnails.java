@@ -34,7 +34,6 @@ public class FixJpgJpgThumbnails {
 			parentHandle = args[0];
 		}
 
-		System.out.println("STFUUUU");
 		Context context = null;
 		try {
 			context = new Context();
