@@ -35,6 +35,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Alan Orth for the International Livestock Research Institute
+ * @version 5.1
+ * @since 1.0
+*/
 public class CountryCodeTagger extends AbstractCurationTask
 {
     public class CountryCodeTaggerConfig {
