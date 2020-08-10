@@ -1,8 +1,7 @@
-# CGSpace Java Helpers [![Build Status](https://travis-ci.org/ilri/cgspace-java-helpers.svg?branch=dspace6)](https://travis-ci.org/ilri/cgspace-java-helpers)
-DSpace curation tasks and other Java-based helpers used on the [CGSpace](https://cgspace.cgiar.org) institutional repository:
+# Curation Tasks
+DSpace curation tasks used on the [CGSpace](https://cgspace.cgiar.org) institutional repository:
 
 - **CountryCodeTagger**: add ISO 3166-1 Alpha2 country codes to items based on their existing country metadata
-- **FixJpgJpgThumbnails**: Fix low-quality ".jpg.jpg" thumbnails by replacing them with their originals
 
 Tested on DSpace 6.3. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC5x/Curation+System).
 
@@ -35,12 +34,6 @@ $ cp target/cgspace-java-helpers-6.0.jar ~/dspace/lib/
 ```
 
 ## Configuration
-Please refer to the appropriate README.md file:
-
-- Curation Tasks: [src/main/java/io/github/ilri/cgspace/ctasks/README.md](https://github.com/ilri/cgspace-java-helpers/blob/dspace6/src/main/java/io/github/ilri/cgspace/ctasks/README.md)
-- Scripts: [src/main/java/io/github/ilri/cgspace/scripts/README.md](https://github.com/ilri/cgspace-java-helpers/blob/dspace6/src/main/java/io/github/ilri/cgspace/scripts/README.md)
-
-
 Add the curation task to DSpace's `config/modules/curate.cfg`:
 
 ```
@@ -72,20 +65,8 @@ $ ~/dspace/bin/dspace curate -t countrycodetagger -i 10568/3 -r - -l 500 -s obje
 
 *Note*: it is very important to set the cache limit (`-l`) and the database transaction scope to something sensible (`object`) if you're curating a community or collection with more than a few hundred items.
 
-## Notes
-This project was initially created according to the [Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/):
-
-```console
-$ mvn -B archetype:generate -DgroupId=io.github.ilri.cgspace -DartifactId=cgspace-java-helpers -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
-```
-
 ## TODO
 
 - Make sure this doesn't work on items in the workflow
 - Check for existence of metadata field before trying to add metadata
 - Add tests
-
-## License
-This work is licensed under the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html).
-
-This repository contains data from the [Debian iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes) project, which is licensed under the [GNU Lesser General Public License v2.1](https://salsa.debian.org/iso-codes-team/iso-codes/-/blob/main/COPYING).
