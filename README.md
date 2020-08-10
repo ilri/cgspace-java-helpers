@@ -37,8 +37,8 @@ $ cp target/cgspace-java-helpers-5.3.jar ~/dspace/lib
 ## Configuration
 Please refer to the appropriate README.md file:
 
-- Curation Tasks: https://github.com/ilri/cgspace-java-helpers/blob/dspace5/src/main/java/io/github/ilri/cgspace/ctasks/README.md
-- Scripts: https://github.com/ilri/cgspace-java-helpers/blob/dspace5/src/main/java/io/github/ilri/cgspace/scripts/README.md
+- Curation Tasks: [src/main/java/io/github/ilri/cgspace/ctasks/README.md](https://github.com/ilri/cgspace-java-helpers/blob/dspace5/src/main/java/io/github/ilri/cgspace/ctasks/README.md)
+- Scripts: [src/main/java/io/github/ilri/cgspace/scripts/README.md](https://github.com/ilri/cgspace-java-helpers/blob/dspace5/src/main/java/io/github/ilri/cgspace/scripts/README.md)
 
 ## Notes
 This project was initially created according to the [Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/):
