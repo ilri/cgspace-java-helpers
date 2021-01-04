@@ -40,6 +40,10 @@ Please refer to the appropriate README.md file:
 - Curation Tasks: [src/main/java/io/github/ilri/cgspace/ctasks/README.md](https://github.com/ilri/cgspace-java-helpers/blob/dspace6/src/main/java/io/github/ilri/cgspace/ctasks/README.md)
 - Scripts: [src/main/java/io/github/ilri/cgspace/scripts/README.md](https://github.com/ilri/cgspace-java-helpers/blob/dspace6/src/main/java/io/github/ilri/cgspace/scripts/README.md)
 
+## Todo
+
+- Add a curation task to normalize DOIs to "https://doi.org" format
+
 ## Notes
 This project was initially created according to the [Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/):
 
