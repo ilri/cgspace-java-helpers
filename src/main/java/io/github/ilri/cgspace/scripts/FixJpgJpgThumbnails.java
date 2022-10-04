@@ -84,7 +84,7 @@ public class FixJpgJpgThumbnails {
 	private static void processItem(Context context, Item item) throws SQLException, AuthorizeException, IOException {
 		// Some bitstreams like Infographics are large JPGs and put in the ORIGINAL bundle on purpose so we shouldn't
 		// swap them.
-		List<MetadataValue> itemTypes = itemService.getMetadataByMetadataString(item, "dc.type");
+		List<MetadataValue> itemTypes = itemService.getMetadataByMetadataString(item, "dcterms.type");
 		boolean itemHasInfographic = false;
 		for (MetadataValue itemType: itemTypes) {
 			if (itemType.getValue().equals("Infographic")) {
