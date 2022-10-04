@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
  * @author Alan Orth for the International Livestock Research Institute
- * @version 6.0
+ * @version 6.1
  * @since 5.1
  */
 public class FixJpgJpgThumbnails {
