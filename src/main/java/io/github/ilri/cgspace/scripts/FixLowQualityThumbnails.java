@@ -124,6 +124,10 @@ public class FixLowQualityThumbnails {
             for (Bitstream thumbnailBitstream : thumbnailBundleBitstreams) {
                 String thumbnailDescription = thumbnailBitstream.getDescription();
 
+                if (StringUtils.isEmpty(thumbnailDescription)) {
+                    continue;
+                }
+
                 // Check if this item has a bitstream in the THUMBNAIL bundle with description "IM
                 // Thumbnail", but only if we haven't already seen one in another iteration for this
                 // bundle.
@@ -139,6 +143,10 @@ public class FixLowQualityThumbnails {
                 for (Bitstream thumbnailBitstream : thumbnailBundleBitstreams) {
                     String thumbnailName = thumbnailBitstream.getName();
                     String thumbnailDescription = thumbnailBitstream.getDescription();
+
+                    if (StringUtils.isEmpty(thumbnailDescription)) {
+                        continue;
+                    }
 
                     // If this item has a "Generated Thumbnail" we can remove it, because those
                     // typically come from other JPEGs in the ORIGINAL bundle and we would prefer
@@ -224,6 +232,10 @@ public class FixLowQualityThumbnails {
                     String originalName = originalBitstream.getName();
                     String originalDescription = originalBitstream.getDescription();
                     String originalFormat = originalBitstream.getFormat(context).getMIMEType();
+
+                    if (StringUtils.isEmpty(originalDescription)) {
+                        continue;
+                    }
 
                     /*
                     - check if the bitstream is a JPEG based on its MIME Type
