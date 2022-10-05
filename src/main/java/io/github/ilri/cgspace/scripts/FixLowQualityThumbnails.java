@@ -1,3 +1,9 @@
+/*
+* Copyright (C) 2022 Alan Orth
+*
+* SPDX-License-Identifier: GPL-3.0-only
+*/
+
 package io.github.ilri.cgspace.scripts;
 
 import org.apache.commons.lang.StringUtils;
