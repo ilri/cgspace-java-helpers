@@ -2,7 +2,8 @@
 DSpace curation tasks and other Java-based helpers used on the [CGSpace](https://cgspace.cgiar.org) institutional repository:
 
 - **CountryCodeTagger**: add ISO 3166-1 Alpha2 country codes to items based on their existing country metadata
-- **FixJpgJpgThumbnails**: Fix low-quality ".jpg.jpg" thumbnails by replacing them with their originals
+- **FixJpgJpgThumbnails**: fix low-quality ".jpg.jpg" thumbnails by replacing them with their originals
+- **FixLowQualityThumbnails**: remove low-quality thumbnails when PDF bitstreams are present
 
 Tested on DSpace 6.3. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC5x/Curation+System).
 
@@ -24,13 +25,13 @@ The jar will be copied to all DSpace applications.
 ### Manual Build and Install
 To build the standalone jar:
 
-```
+```console
 $ mvn package
 ```
 
 Copy the resulting jar to the DSpace `lib` directory:
 
-```
+```console
 $ cp target/cgspace-java-helpers-6.1-SNAPSHOT.jar ~/dspace/lib/
 ```
 
@@ -40,7 +41,7 @@ Please refer to the appropriate README.md file:
 - Curation Tasks: [src/main/java/io/github/ilri/cgspace/ctasks/README.md](https://github.com/ilri/cgspace-java-helpers/blob/dspace6/src/main/java/io/github/ilri/cgspace/ctasks/README.md)
 - Scripts: [src/main/java/io/github/ilri/cgspace/scripts/README.md](https://github.com/ilri/cgspace-java-helpers/blob/dspace6/src/main/java/io/github/ilri/cgspace/scripts/README.md)
 
-## Todo
+## TODO
 
 - Add a curation task to normalize DOIs to "https://doi.org" format
 
