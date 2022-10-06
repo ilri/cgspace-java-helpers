@@ -6,8 +6,9 @@
 
 package io.github.ilri.cgspace.ctasks;
 
-import com.google.gson.annotations.SerializedName;
 import java.util.List;
+
+import com.google.gson.annotations.SerializedName;
 
 public class ISO3166CountriesVocabulary extends CountriesVocabulary {
     // support reading iso_3166-1.json from Debian's iso-codes package using SerializedName since our class needs to match the JSON exactly
