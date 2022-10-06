@@ -88,13 +88,13 @@ public class FixJpgJpgThumbnails {
 	}
 
 	private static void processItem(Context context, Item item) throws SQLException, AuthorizeException, IOException {
-		// Some bitstreams like Infographics are large JPGs and put in the ORIGINAL bundle on purpose so we shouldn't
+		// Some bitstreams like Infographics and Maps are large JPEGs and put in the ORIGINAL bundle on purpose so we shouldn't
 		// swap them.
 		List<MetadataValue> itemTypes = itemService.getMetadataByMetadataString(item, "dcterms.type");
-		boolean itemHasInfographic = false;
 		for (MetadataValue itemType: itemTypes) {
-			if (itemType.getValue().equals("Infographic")) {
-				itemHasInfographic = true;
+			if (itemType.getValue().equals("Infographic") || itemType.getValue().equals("Map")) {
+				System.out.println(item.getHandle() + ": item has an Infographic or Map, skipping.");
+				return;
 			}
 		}
 
@@ -117,7 +117,6 @@ public class FixJpgJpgThumbnails {
 							/*
 							- check if the original file name is the same as the thumbnail name minus the extra ".jpg"
 							- check if the thumbnail description indicates it was automatically generated
-							- check if the item has dc.type Infographic (JPG could be the "real" item!)
 							- check if the original bitstream is less than ~100KiB
 							    - Note: in my tests there were 4022 items with ".jpg.jpg" thumbnails totaling 394549249
 							      bytes for an average of about 98KiB so ~100KiB seems like a good cut off
@@ -125,7 +124,6 @@ public class FixJpgJpgThumbnails {
 							if (
 									originalName.equalsIgnoreCase(StringUtils.removeEndIgnoreCase(thumbnailName, ".jpg"))
 									&& ("Generated Thumbnail".equals(thumbnailBitstream.getDescription()) || "IM Thumbnail".equals(thumbnailBitstream.getDescription()))
-									&& !itemHasInfographic
 									&& originalBitstreamBytes < 100000
 							) {
 								System.out.println(item.getHandle() + ": replacing " + thumbnailName + " with " + originalName);
