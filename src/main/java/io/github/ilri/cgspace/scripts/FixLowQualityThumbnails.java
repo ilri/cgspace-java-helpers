@@ -1,15 +1,10 @@
 /*
-* Copyright (C) 2022 Alan Orth
-*
-* SPDX-License-Identifier: GPL-3.0-or-later
-*/
+ * Copyright (C) 2022 Alan Orth
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 package io.github.ilri.cgspace.scripts;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.dspace.authorize.AuthorizeException;
@@ -26,6 +21,11 @@ import org.dspace.core.Constants;
 import org.dspace.core.Context;
 import org.dspace.handle.factory.HandleServiceFactory;
 import org.dspace.handle.service.HandleService;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Fix low-quality thumbnails in a DSpace repository.
