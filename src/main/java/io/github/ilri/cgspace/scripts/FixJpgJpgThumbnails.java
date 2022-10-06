@@ -103,6 +103,12 @@ public class FixJpgJpgThumbnails {
 			List<Bitstream> thumbnailBundleBitstreams = thumbnailBundle.getBitstreams();
 			for (Bitstream thumbnailBitstream : thumbnailBundleBitstreams) {
 				String thumbnailName = thumbnailBitstream.getName();
+				String thumbnailDescription = thumbnailBitstream.getDescription();
+
+				// There is no point continuing if the thumbnail's description is empty or null
+				if (StringUtils.isEmpty(thumbnailDescription)) {
+					continue;
+				}
 
 				if (thumbnailName.toLowerCase().contains(".jpg.jpg")) {
 					List<Bundle> originalBundles = item.getBundles("ORIGINAL");
@@ -123,7 +129,7 @@ public class FixJpgJpgThumbnails {
 							*/
 							if (
 									originalName.equalsIgnoreCase(StringUtils.removeEndIgnoreCase(thumbnailName, ".jpg"))
-									&& ("Generated Thumbnail".equals(thumbnailBitstream.getDescription()) || "IM Thumbnail".equals(thumbnailBitstream.getDescription()))
+									&& ("Generated Thumbnail".equals(thumbnailDescription) || "IM Thumbnail".equals(thumbnailDescription))
 									&& originalBitstreamBytes < 100000
 							) {
 								System.out.println(item.getHandle() + ": replacing " + thumbnailName + " with " + originalName);
