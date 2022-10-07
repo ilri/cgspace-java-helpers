@@ -59,10 +59,8 @@ public class FixJpgJpgThumbnails {
                 DSpaceObject parent = handleService.resolveToObject(context, parentHandle);
                 if (parent != null) {
                     switch (parent.getType()) {
-                        case Constants.COLLECTION:
-                            process(
-                                    context,
-                                    itemService.findByCollection(context, (Collection) parent));
+                        case Constants.SITE:
+                            process(context, itemService.findAll(context));
                             break;
                         case Constants.COMMUNITY:
                             List<Collection> collections = ((Community) parent).getCollections();
@@ -72,8 +70,10 @@ public class FixJpgJpgThumbnails {
                                         itemService.findAllByCollection(context, collection));
                             }
                             break;
-                        case Constants.SITE:
-                            process(context, itemService.findAll(context));
+                        case Constants.COLLECTION:
+                            process(
+                                    context,
+                                    itemService.findByCollection(context, (Collection) parent));
                             break;
                         case Constants.ITEM:
                             processItem(context, (Item) parent);
