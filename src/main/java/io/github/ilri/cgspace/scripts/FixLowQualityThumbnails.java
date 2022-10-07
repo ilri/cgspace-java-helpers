@@ -122,6 +122,8 @@ public class FixLowQualityThumbnails {
 
     private static void processItem(Context context, Item item)
             throws SQLException, AuthorizeException, IOException {
+        System.out.println("FixLowQualityThumbnails: processing item: " + item.getHandle());
+
         // Set some state for the item before we iterate over the THUMBNAIL bundle
         boolean itemHasImThumbnail = false;
 
@@ -162,7 +164,7 @@ public class FixLowQualityThumbnails {
                     // ption will *always* be "Generated Thumbnail".
                     if ("Generated Thumbnail".equals(thumbnailDescription)) {
                         System.out.print("\u001b[33m");
-                        System.out.println("Deleting (" + item.getHandle() + "):");
+                        System.out.println("> Action: remove old thumbnail from THUMBNAIL bundle");
                         System.out.println("> Name: »" + thumbnailName + "«");
                         System.out.println("> Description: »" + thumbnailDescription + "«");
                         System.out.print("\u001b[0m");
@@ -176,7 +178,7 @@ public class FixLowQualityThumbnails {
                     } else if (thumbnailDescription.toLowerCase().contains("thumbnail")
                             && !"IM Thumbnail".equals(thumbnailDescription)) {
                         System.out.print("\u001b[33m");
-                        System.out.println("Deleting (" + item.getHandle() + "):");
+                        System.out.println("> Action: remove manually uploaded thumbnail from THUMBNAIL bundle");
                         System.out.println("> Name: »" + thumbnailName + "«");
                         System.out.println("> Description: »" + thumbnailDescription + "«");
                         System.out.print("\u001b[0m");
@@ -188,7 +190,7 @@ public class FixLowQualityThumbnails {
                         // a thumbnail for a journal or a limited access item.
                     } else {
                         System.out.print("\u001b[34m");
-                        System.out.println("Skipping (" + item.getHandle() + "):");
+                        System.out.println("> Action: skip other thumbnail in THUMBNAIL bundle");
                         System.out.println("> Name: »" + thumbnailName + "«");
                         System.out.println("> Description: »" + thumbnailDescription + "«");
                         System.out.print("\u001b[0m");
@@ -253,7 +255,7 @@ public class FixLowQualityThumbnails {
                             && (originalName.toLowerCase().contains("thumbnail")
                                     || originalDescription.toLowerCase().contains("thumbnail"))) {
                         System.out.print("\u001b[33m");
-                        System.out.println("Removing (" + item.getHandle() + "):");
+                        System.out.println("> Action: remove thumbnail from ORIGINAL bundle");
                         System.out.println("> Name: »" + originalName + "«");
                         System.out.println("> Description: »" + originalDescription + "«");
                         System.out.print("\u001b[0m");
@@ -263,7 +265,7 @@ public class FixLowQualityThumbnails {
 
                     } else {
                         System.out.print("\u001b[34m");
-                        System.out.println("Skipping (" + item.getHandle() + "):");
+                        System.out.println("> Action: skip other bitstream in ORIGINAL bundle");
                         System.out.println("> Name: »" + originalName + "«");
                         System.out.println("> Description: »" + originalDescription + "«");
                         System.out.print("\u001b[0m");
