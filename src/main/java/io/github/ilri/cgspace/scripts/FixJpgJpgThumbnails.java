@@ -61,6 +61,7 @@ public class FixJpgJpgThumbnails {
                     switch (parent.getType()) {
                         case Constants.SITE:
                             process(context, itemService.findAll(context));
+                            context.commit();
                             break;
                         case Constants.COMMUNITY:
                             List<Collection> collections = ((Community) parent).getCollections();
@@ -69,11 +70,13 @@ public class FixJpgJpgThumbnails {
                                         context,
                                         itemService.findAllByCollection(context, collection));
                             }
+                            context.commit();
                             break;
                         case Constants.COLLECTION:
                             process(
                                     context,
                                     itemService.findByCollection(context, (Collection) parent));
+                            context.commit();
                             break;
                         case Constants.ITEM:
                             processItem(context, (Item) parent);
