@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Updated
 - Update dependencies in `pom.xml`
+- `iso_3166-1.json` from iso-codes 4.11.0
 
 ### Changed
 - Java compiler and target from JDK 7 to JDK 8
