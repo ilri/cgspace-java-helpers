@@ -52,6 +52,14 @@ This project was initially created according to the [Maven Getting Started Guide
 $ mvn -B archetype:generate -DgroupId=io.github.ilri.cgspace -DartifactId=cgspace-java-helpers -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
 ```
 
+To deploy a new `-SNAPSHOT` release to Maven Central (make sure OSSHRH credentials are in `~/.m2/settings.xml`):
+
+```console
+$ mvn clean deploy
+```
+
+See: <a href="https://central.sonatype.org/publish/publish-maven/#performing-a-snapshot-deployment">Performing a Snapshot Deployment</a>
+
 ## License
 This work is licensed under the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
