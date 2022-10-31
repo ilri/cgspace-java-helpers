@@ -5,7 +5,7 @@ DSpace curation tasks and other Java-based helpers used on the [CGSpace](https:/
 - **FixJpgJpgThumbnails**: fix low-quality ".jpg.jpg" thumbnails by replacing them with their originals
 - **FixLowQualityThumbnails**: remove low-quality thumbnails when PDF bitstreams are present
 
-Tested on DSpace 6.3. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC5x/Curation+System).
+Tested on DSpace 6.3. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC6x/Curation+System).
 
 ## Build and Install
 
