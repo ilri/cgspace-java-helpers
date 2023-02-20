@@ -15,7 +15,7 @@ To use these curation tasks in a DSpace project add the following dependency to 
 <dependency>
   <groupId>io.github.ilri.cgspace</groupId>
   <artifactId>cgspace-java-helpers</artifactId>
-  <version>6.1-SNAPSHOT</version>
+  <version>6.2</version>
 </dependency>
 ```
 
@@ -31,7 +31,7 @@ $ mvn package
 Copy the resulting jar to the DSpace `lib` directory:
 
 ```console
-$ cp target/cgspace-java-helpers-6.1-SNAPSHOT.jar ~/dspace/lib/
+$ cp target/cgspace-java-helpers-6.2.jar ~/dspace/lib/
 ```
 
 ## Invocation
