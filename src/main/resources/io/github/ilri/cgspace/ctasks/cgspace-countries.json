@@ -17,14 +17,6 @@
       "numeric": "180"
     },
     {
-      "alpha_2": "IR",
-      "alpha_3": "IRN",
-      "name": "Iran, Islamic Republic of",
-      "cgspace_name": "Iran",
-      "numeric": "364",
-      "official_name": "Islamic Republic of Iran"
-    },
-    {
       "alpha_2": "KP",
       "alpha_3": "PRK",
       "common_name": "North Korea",
@@ -32,13 +24,6 @@
       "cgspace_name": "Korea, DPR",
       "numeric": "408",
       "official_name": "Democratic People's Republic of Korea"
-    },
-    {
-      "alpha_2": "LA",
-      "alpha_3": "LAO",
-      "name": "Lao People's Democratic Republic",
-      "cgspace_name": "Laos",
-      "numeric": "418"
     },
     {
       "alpha_2": "FM",
@@ -55,12 +40,5 @@
       "cgspace_name": "Russia",
       "numeric": "643"
     },
-    {
-      "alpha_2": "SY",
-      "alpha_3": "SYR",
-      "name": "Syrian Arab Republic",
-      "cgspace_name": "Syria",
-      "numeric": "760"
-    }
   ]
 }
