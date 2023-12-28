@@ -138,7 +138,7 @@ public class FixJpgJpgThumbnails {
                         for (Bitstream originalBitstream : originalBundleBitstreams) {
                             String originalName = originalBitstream.getName();
 
-                            long originalBitstreamBytes = originalBitstream.getSize();
+                            long originalBitstreamBytes = originalBitstream.getSizeBytes();
 
                             /*
                             - check if the original file name is the same as the thumbnail name minus the extra ".jpg"
