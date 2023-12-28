@@ -91,7 +91,7 @@ public class CountryCodeTagger extends AbstractCurationTask {
                 itemService.getMetadataByMetadataString(item, config.iso3166Field);
 
         // skip items that don't have country metadata
-        if (itemCountries.size() == 0) {
+        if (itemCountries.isEmpty()) {
             alpha2Result.setResult(itemHandle + ": no countries, skipping.");
             alpha2Result.setStatus(Curator.CURATE_SKIP);
         } else {
@@ -134,7 +134,7 @@ public class CountryCodeTagger extends AbstractCurationTask {
             List<MetadataValue> itemAlpha2CountryCodes =
                     itemService.getMetadataByMetadataString(item, config.iso3166Alpha2Field);
 
-            if (itemAlpha2CountryCodes.size() == 0) {
+            if (itemAlpha2CountryCodes.isEmpty()) {
                 List<String> newAlpha2Codes = new ArrayList<String>();
                 for (MetadataValue itemCountry : itemCountries) {
                     // check ISO 3166-1 countries
@@ -158,7 +158,7 @@ public class CountryCodeTagger extends AbstractCurationTask {
                     }
                 }
 
-                if (newAlpha2Codes.size() > 0) {
+                if (!newAlpha2Codes.isEmpty()) {
                     try {
                         itemService.addMetadata(
                                 Curator.curationContext(),
