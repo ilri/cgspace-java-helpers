@@ -8,7 +8,8 @@ package io.github.ilri.cgspace.ctasks;
 
 import com.google.gson.Gson;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
@@ -33,7 +34,7 @@ public class CountryCodeTagger extends AbstractCurationTask {
         private final String iso3166Alpha2Field = taskProperty("iso3166-alpha2.field");
         private final boolean forceupdate = taskBooleanProperty("forceupdate", false);
 
-        private Logger log = Logger.getLogger(CountryCodeTagger.class);
+        private final Logger log = LogManager.getLogger();
     }
 
     public class CountryCodeTaggerResult {
