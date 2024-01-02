@@ -3,7 +3,7 @@ DSpace curation tasks used on the [CGSpace](https://cgspace.cgiar.org) instituti
 
 - **CountryCodeTagger**: add ISO 3166-1 Alpha2 country codes to items based on their existing country metadata
 
-Tested on DSpace 6.3. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC5x/Curation+System).
+Tested on DSpace 7.6. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC5x/Curation+System).
 
 ## Build and Install
 
@@ -14,7 +14,7 @@ To use these curation tasks in a DSpace project add the following dependency to 
 <dependency>
   <groupId>io.github.ilri.cgspace</groupId>
   <artifactId>cgspace-java-helpers</artifactId>
-  <version>6.2-SNAPSHOT</version>
+  <version>7.6-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -30,7 +30,7 @@ $ mvn package
 Copy the resulting jar to the DSpace `lib` directory:
 
 ```
-$ cp target/cgspace-java-helpers-6.2-SNAPSHOT.jar ~/dspace/lib/
+$ cp target/cgspace-java-helpers-7.6-SNAPSHOT.jar ~/dspace/lib/
 ```
 
 ## Configuration

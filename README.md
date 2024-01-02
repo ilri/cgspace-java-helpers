@@ -5,7 +5,7 @@ DSpace curation tasks and other Java-based helpers used on the [CGSpace](https:/
 - **FixJpgJpgThumbnails**: fix low-quality ".jpg.jpg" thumbnails by replacing them with their originals
 - **FixLowQualityThumbnails**: remove low-quality thumbnails when PDF bitstreams are present
 
-Tested on DSpace 6.3. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC6x/Curation+System).
+Tested on DSpace 7.6. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC7x/Curation+System).
 
 ## Build and Install
 
@@ -16,7 +16,7 @@ To use these curation tasks in a DSpace project add the following dependency to 
 <dependency>
   <groupId>io.github.ilri.cgspace</groupId>
   <artifactId>cgspace-java-helpers</artifactId>
-  <version>6.2-SNAPSHOT</version>
+  <version>7.6-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -32,7 +32,7 @@ $ mvn package
 Copy the resulting jar to the DSpace `lib` directory:
 
 ```console
-$ cp target/cgspace-java-helpers-6.2-SNAPSHOT.jar ~/dspace/lib/
+$ cp target/cgspace-java-helpers-7.6-SNAPSHOT.jar ~/dspace/lib/
 ```
 
 ## Configuration
