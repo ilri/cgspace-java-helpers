@@ -24,6 +24,7 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CountryCodeTagger extends AbstractCurationTask {
     public class CountryCodeTaggerConfig {
@@ -37,7 +38,7 @@ public class CountryCodeTagger extends AbstractCurationTask {
         private final Logger log = LogManager.getLogger();
     }
 
-    public class CountryCodeTaggerResult {
+    public static class CountryCodeTaggerResult {
         private int status = Curator.CURATE_UNSET;
         private String result = null;
 
@@ -102,7 +103,7 @@ public class CountryCodeTagger extends AbstractCurationTask {
             BufferedReader reader =
                     new BufferedReader(
                             new InputStreamReader(
-                                    this.getClass().getResourceAsStream(config.isocodesJsonPath)));
+                                    Objects.requireNonNull(this.getClass().getResourceAsStream(config.isocodesJsonPath))));
             ISO3166CountriesVocabulary isocodesCountriesJson =
                     gson.fromJson(reader, ISO3166CountriesVocabulary.class);
             reader.close();
@@ -110,8 +111,8 @@ public class CountryCodeTagger extends AbstractCurationTask {
             reader =
                     new BufferedReader(
                             new InputStreamReader(
-                                    this.getClass()
-                                            .getResourceAsStream(config.cgspaceCountriesJsonPath)));
+                                    Objects.requireNonNull(this.getClass()
+                                            .getResourceAsStream(config.cgspaceCountriesJsonPath))));
             CGSpaceCountriesVocabulary cgspaceCountriesJson =
                     gson.fromJson(reader, CGSpaceCountriesVocabulary.class);
             reader.close();

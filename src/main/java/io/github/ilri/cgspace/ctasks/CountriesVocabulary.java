@@ -10,14 +10,14 @@ import javax.annotation.Nullable;
 
 public class CountriesVocabulary {
 
-    class Country {
-        private String name; // required
-        private String common_name; // optional
-        private String official_name; // optional
-        private String cgspace_name; // optional
-        private String numeric; // required Hmmmm need to cast this...
-        private String alpha_2; // required
-        private String alpha_3; // required
+    static class Country {
+        private final String name; // required
+        private final String common_name; // optional
+        private final String official_name; // optional
+        private final String cgspace_name; // optional
+        private final String numeric; // required Hmmmm need to cast this...
+        private final String alpha_2; // required
+        private final String alpha_3; // required
 
         public Country(
                 String name,
