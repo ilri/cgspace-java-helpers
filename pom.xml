@@ -48,7 +48,7 @@
 
   <scm>
       <connection>scm:git:git://github.com/ilri/cgspace-java-helpers.git</connection>
-      <developerConnection>scm:git:ssh://github.com:nanosai/cgspace-java-helpers.git</developerConnection>
+      <developerConnection>scm:git:ssh://github.com:ilri/cgspace-java-helpers.git</developerConnection>
       <url>https://github.com/ilri/cgspace-java-helpers</url>
   </scm>
 
