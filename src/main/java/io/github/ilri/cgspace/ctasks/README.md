@@ -35,7 +35,7 @@ $ cp target/cgspace-java-helpers-7.6.1-SNAPSHOT.jar ~/dspace/lib/
 ```
 
 ## Configuration
-Add the curation task to DSpace's `config/modules/curate.cfg`:
+Add the curation task(s) to DSpace's `config/modules/curate.cfg`:
 
 ```
 plugin.named.org.dspace.curate.CurationTask = io.github.ilri.cgspace.ctasks.CountryCodeTagger = countrycodetagger
