@@ -2,6 +2,7 @@
 DSpace curation tasks used on the [CGSpace](https://cgspace.cgiar.org) institutional repository:
 
 - **CountryCodeTagger**: add ISO 3166-1 Alpha2 country codes to items based on their existing country metadata
+- **NormalizeDOIs**: normalize DOIs by stripping whitespace, lowercasing, and converting to https://doi.org/ format
 
 Tested on DSpace 7.6. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC5x/Curation+System).
 
@@ -39,6 +40,7 @@ Add the curation task to DSpace's `config/modules/curate.cfg`:
 ```
 plugin.named.org.dspace.curate.CurationTask = io.github.ilri.cgspace.ctasks.CountryCodeTagger = countrycodetagger
 plugin.named.org.dspace.curate.CurationTask = io.github.ilri.cgspace.ctasks.CountryCodeTagger = countrycodetagger.force
+plugin.named.org.dspace.curate.CurationTask = io.github.ilri.cgspace.ctasks.NormalizeDOIs = normalizedois
 ```
 
 And then add the following variables to your `local.cfg` or some other [configuration file that is included](https://wiki.lyrasis.org/display/DSDOC6x/Configuration+Reference#ConfigurationReference-IncludingotherPropertyFiles):

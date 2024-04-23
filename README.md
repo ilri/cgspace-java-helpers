@@ -4,6 +4,7 @@ DSpace curation tasks and other Java-based helpers used on the [CGSpace](https:/
 - **CountryCodeTagger**: add ISO 3166-1 Alpha2 country codes to items based on their existing country metadata
 - **FixJpgJpgThumbnails**: fix low-quality ".jpg.jpg" thumbnails by replacing them with their originals
 - **FixLowQualityThumbnails**: remove low-quality thumbnails when PDF bitstreams are present
+- **NormalizeDOIs**: normalize DOIs by stripping whitespace, lowercasing, and converting to https://doi.org/ format
 
 Tested on DSpace 7.6. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC7x/Curation+System).
 
