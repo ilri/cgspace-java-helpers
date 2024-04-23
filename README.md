@@ -39,8 +39,8 @@ $ cp target/cgspace-java-helpers-7.6.1.1-SNAPSHOT.jar ~/dspace/lib/
 ## Configuration
 Please refer to the appropriate README.md file:
 
-- Curation Tasks: [src/main/java/io/github/ilri/cgspace/ctasks/README.md](https://github.com/ilri/cgspace-java-helpers/blob/dspace6/src/main/java/io/github/ilri/cgspace/ctasks/README.md)
-- Scripts: [src/main/java/io/github/ilri/cgspace/scripts/README.md](https://github.com/ilri/cgspace-java-helpers/blob/dspace6/src/main/java/io/github/ilri/cgspace/scripts/README.md)
+- Curation Tasks: [src/main/java/io/github/ilri/cgspace/ctasks/README.md](https://github.com/ilri/cgspace-java-helpers/blob/dspace7/src/main/java/io/github/ilri/cgspace/ctasks/README.md)
+- Scripts: [src/main/java/io/github/ilri/cgspace/scripts/README.md](https://github.com/ilri/cgspace-java-helpers/blob/dspace7/src/main/java/io/github/ilri/cgspace/scripts/README.md)
 
 ## TODO
 
