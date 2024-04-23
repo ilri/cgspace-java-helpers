@@ -44,7 +44,6 @@ Please refer to the appropriate README.md file:
 
 ## TODO
 
-- Add a curation task to normalize DOIs to "https://doi.org" format
 - Migrate from maven-deploy-plugin to nexus-staging-maven-plugin, see: https://central.sonatype.org/publish/publish-maven/#nexus-staging-maven-plugin-for-deployment-and-release
 - Stop using oss-parent, see: https://central.sonatype.org/publish/publish-maven/#create-a-ticket-with-sonatype
 
