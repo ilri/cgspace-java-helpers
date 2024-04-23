@@ -49,7 +49,7 @@
   <scm>
       <connection>scm:git:git://github.com/ilri/cgspace-java-helpers.git</connection>
       <developerConnection>scm:git:ssh://github.com:nanosai/cgspace-java-helpers.git</developerConnection>
-      <url>http://github.com/ilri/cgspace-java-helpers</url>
+      <url>https://github.com/ilri/cgspace-java-helpers</url>
   </scm>
 
   <distributionManagement>
