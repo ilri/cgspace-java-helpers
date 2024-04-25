@@ -68,7 +68,6 @@ public class NormalizeDOIs extends AbstractCurationTask {
             } else {
                 result = "All DOIs already normalized";
             }
-            report(result);
             setResult(result);
 
             return Curator.CURATE_SUCCESS;

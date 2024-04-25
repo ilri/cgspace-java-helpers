@@ -77,7 +77,6 @@ public class CountryCodeTagger extends AbstractCurationTask {
             }
 
             setResult(alpha2Result.getResult());
-            report(alpha2Result.getResult());
         }
 
         return alpha2Result.getStatus();
