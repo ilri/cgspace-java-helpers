@@ -85,14 +85,13 @@ public class CountryCodeTagger extends AbstractCurationTask {
     public CountryCodeTaggerResult performAlpha2(Item item, CountryCodeTaggerConfig config)
             throws IOException, SQLException {
         CountryCodeTaggerResult alpha2Result = new CountryCodeTaggerResult();
-        String itemHandle = item.getHandle();
 
         List<MetadataValue> itemCountries =
                 itemService.getMetadataByMetadataString(item, config.iso3166Field);
 
         // skip items that don't have country metadata
         if (itemCountries.isEmpty()) {
-            alpha2Result.setResult(itemHandle + ": no countries, skipping.");
+            alpha2Result.setResult("No countries, skipping.");
             alpha2Result.setStatus(Curator.CURATE_SKIP);
         } else {
             Gson gson = new Gson();
@@ -171,21 +170,20 @@ public class CountryCodeTagger extends AbstractCurationTask {
                         itemService.update(Curator.curationContext(), item);
                     } catch (SQLException | AuthorizeException sqle) {
                         config.log.debug(sqle.getMessage());
-                        alpha2Result.setResult(itemHandle + ": error");
+                        alpha2Result.setResult("Error");
                         alpha2Result.setStatus(Curator.CURATE_ERROR);
                     }
 
                     alpha2Result.setResult(
-                            itemHandle
-                                    + ": added "
+                            "Added "
                                     + newAlpha2Codes.size()
                                     + " alpha2 country code(s)");
                 } else {
-                    alpha2Result.setResult(itemHandle + ": no matching countries found");
+                    alpha2Result.setResult("No matching countries found");
                 }
                 alpha2Result.setStatus(Curator.CURATE_SUCCESS);
             } else {
-                alpha2Result.setResult(itemHandle + ": item has country codes, skipping");
+                alpha2Result.setResult("Item already has country codes, skipping unless forced");
                 alpha2Result.setStatus(Curator.CURATE_SKIP);
             }
         }
