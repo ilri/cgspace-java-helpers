@@ -26,6 +26,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/*
+ * Add ISO 3166-1 Alpha2 country codes to items based on their existing country metadata.
+ *
+ * @author Alan Orth for the International Livestock Research Institute
+ * @version 7.6.1.2
+ * @since 5.1
+ */
 public class CountryCodeTagger extends AbstractCurationTask {
     public class CountryCodeTaggerConfig {
         private final String isocodesJsonPath = "/io/github/ilri/cgspace/ctasks/iso_3166-1.json";

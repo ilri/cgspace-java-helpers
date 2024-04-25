@@ -29,7 +29,7 @@ import java.util.List;
  * TODO: allow operation on communities and collections (currently only works on items)
  *
  * @author Alan Orth for the International Livestock Research Institute
- * @version 7.6.1.1
+ * @version 7.6.1.2
  * @since 7.6.1.1
  */
 @Suspendable
