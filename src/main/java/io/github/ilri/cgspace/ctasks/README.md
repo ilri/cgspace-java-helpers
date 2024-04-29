@@ -62,7 +62,7 @@ countrycodetagger.iso3166-alpha2.field = cg.coverage.iso3166-alpha2
 Once the jar is installed and you have added appropriate configuration in `~/dspace/config/modules`:
 
 ```
-$ ~/dspace/bin/dspace curate -t countrycodetagger -i 10568/3 -r - -s object
+$ ~/dspace/bin/dspace curate -e eperson@repo.org -t countrycodetagger -i 10568/3 -r - -s object
 ```
 
 *Note*: it is very important to set the database transaction scope to something sensible (`object`) if you're curating a community or collection with more than a few hundred items.
