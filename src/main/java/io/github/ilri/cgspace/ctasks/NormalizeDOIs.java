@@ -78,19 +78,19 @@ public class NormalizeDOIs extends AbstractCurationTask {
     }
 
     private static String getNormalizedDOI(MetadataValue itemDOI) {
-        // 1. Convert to lowercase
+        // Convert to lowercase
         String newDOI = itemDOI.getValue().toLowerCase();
-        // 2. Strip leading and trailing whitespace
+        // Strip leading and trailing whitespace
         newDOI = newDOI.strip();
-        // 3. Convert to HTTPS
+        // Convert to HTTPS
         newDOI = newDOI.replace("http://", "https://");
-        // 4. Prefer doi.org to dx.doi.org
+        // Prefer doi.org to dx.doi.org
         newDOI = newDOI.replace("dx.doi.org", "doi.org");
-        // 5. Prefer doi.org to www.doi.org
+        // Prefer doi.org to www.doi.org
         newDOI = newDOI.replace("www.doi.org", "doi.org");
-        // 6. Replace values like doi: 10.11648/j.jps.20140201.14
+        // Replace values like doi: 10.11648/j.jps.20140201.14
         newDOI = newDOI.replaceAll("^doi: 10\\.", "https://doi.org/10.");
-        // 7. Replace values like 10.3390/foods12010115
+        // Replace values like 10.3390/foods12010115
         newDOI = newDOI.replaceAll("^10\\.", "https://doi.org/10.");
 
         return newDOI;
