@@ -10,6 +10,15 @@
 
   <name>cgspace-java-helpers</name>
   <url>https://github.com/ilri/cgspace-java-helpers</url>
+  <description>Curation tasks and helper scripts for the CGSpace institutional repository</description>
+
+  <developers>
+    <developer>
+      <name>Alan Orth</name>
+      <email>maven@mjanja.mozmail.com</email>
+      <organizationUrl>https://mjanja.ch</organizationUrl>
+    </developer>
+  </developers>
 
   <licenses>
     <license>
