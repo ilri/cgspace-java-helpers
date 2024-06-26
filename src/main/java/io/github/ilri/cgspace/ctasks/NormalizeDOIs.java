@@ -29,7 +29,7 @@ import java.util.List;
  * TODO: allow operation on communities and collections (currently only works on items)
  *
  * @author Alan Orth for the International Livestock Research Institute
- * @version 7.6.1.2
+ * @version 7.6.1.3
  * @since 7.6.1.1
  */
 @Suspendable
@@ -88,6 +88,8 @@ public class NormalizeDOIs extends AbstractCurationTask {
         newDOI = newDOI.replace("dx.doi.org", "doi.org");
         // Prefer doi.org to www.doi.org
         newDOI = newDOI.replace("www.doi.org", "doi.org");
+        // Fix URL encoded slashes (%2f)
+        newDOI = newDOI.replace("%2f", "/");
         // Replace values like doi: 10.11648/j.jps.20140201.14
         newDOI = newDOI.replaceAll("^doi: 10\\.", "https://doi.org/10.");
         // Replace values like 10.3390/foods12010115
