@@ -4,7 +4,7 @@ Java-based helpers used on the [CGSpace](https://cgspace.cgiar.org) institutiona
 - **FixJpgJpgThumbnails**: fix low-quality ".jpg.jpg" thumbnails by replacing them with their originals
 - **FixLowQualityThumbnails**: remove low-quality thumbnails when PDF bitstreams are present
 
-Tested on DSpace 7.6. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC6x/Curation+System).
+Tested on DSpace 7.6.1. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC6x/Curation+System).
 
 ## Build and Install
 
