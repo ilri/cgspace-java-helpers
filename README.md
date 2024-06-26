@@ -42,10 +42,6 @@ Please refer to the appropriate README.md file:
 - Curation Tasks: [src/main/java/io/github/ilri/cgspace/ctasks/README.md](https://github.com/ilri/cgspace-java-helpers/blob/dspace7/src/main/java/io/github/ilri/cgspace/ctasks/README.md)
 - Scripts: [src/main/java/io/github/ilri/cgspace/scripts/README.md](https://github.com/ilri/cgspace-java-helpers/blob/dspace7/src/main/java/io/github/ilri/cgspace/scripts/README.md)
 
-## TODO
-
-- Migrate from maven-deploy-plugin to nexus-staging-maven-plugin, see: https://central.sonatype.org/publish/publish-maven/#nexus-staging-maven-plugin-for-deployment-and-release
-
 ## Notes
 This project was initially created according to the [Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/):
 
