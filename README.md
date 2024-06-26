@@ -45,7 +45,6 @@ Please refer to the appropriate README.md file:
 ## TODO
 
 - Migrate from maven-deploy-plugin to nexus-staging-maven-plugin, see: https://central.sonatype.org/publish/publish-maven/#nexus-staging-maven-plugin-for-deployment-and-release
-- Stop using oss-parent, see: https://central.sonatype.org/publish/publish-maven/#create-a-ticket-with-sonatype
 
 ## Notes
 This project was initially created according to the [Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/):
