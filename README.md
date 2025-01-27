@@ -6,7 +6,7 @@ DSpace curation tasks and other Java-based helpers used on the [CGSpace](https:/
 - **FixLowQualityThumbnails**: remove low-quality thumbnails when PDF bitstreams are present
 - **NormalizeDOIs**: normalize DOIs by stripping whitespace, lowercasing, and converting to https://doi.org/ format
 
-Tested on DSpace 7.6.1. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC7x/Curation+System).
+Tested on DSpace 7.6.2. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC7x/Curation+System).
 
 ## Build and Install
 
