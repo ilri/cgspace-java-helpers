@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Updated
 - Update dspace-api dependency to 7.6.2
-- Update gson dependency to >= 2.10 to match dspace-api
+- Update gson dependency to 2.10.1 to match dspace-api
 
 ## [7.6.1.3] - 2024-06-26
 ### Updated
