@@ -6,7 +6,7 @@
 
   <groupId>io.github.ilri.cgspace</groupId>
   <artifactId>cgspace-java-helpers</artifactId>
-  <version>7.6.1.4-SNAPSHOT</version>
+  <version>8.2.0-SNAPSHOT</version>
 
   <name>cgspace-java-helpers</name>
   <url>https://github.com/ilri/cgspace-java-helpers</url>
@@ -36,7 +36,7 @@
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
-      <version>2.11.0</version>
+      <version>2.13.1</version>
       <!-- Ignore gson's dependency on error_prone_annotations because it causes dependency convergence with something pulled in by dspace-api -->
       <exclusions>
         <exclusion>
@@ -48,7 +48,7 @@
     <dependency>
       <groupId>org.dspace</groupId>
       <artifactId>dspace-api</artifactId>
-      <version>7.6.3</version>
+      <version>8.2</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
