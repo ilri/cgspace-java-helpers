@@ -4,7 +4,7 @@ DSpace curation tasks used on the [CGSpace](https://cgspace.cgiar.org) instituti
 - **CountryCodeTagger**: add ISO 3166-1 Alpha2 country codes to items based on their existing country metadata
 - **NormalizeDOIs**: normalize DOIs by stripping whitespace, lowercasing, and converting to https://doi.org/ format
 
-Tested on DSpace 7.6.3. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC7x/Curation+System).
+Tested on DSpace 8.2. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC8x/Curation+System).
 
 ## Build and Install
 
@@ -15,7 +15,7 @@ To use these curation tasks in a DSpace project add the following dependency to 
 <dependency>
   <groupId>io.github.ilri.cgspace</groupId>
   <artifactId>cgspace-java-helpers</artifactId>
-  <version>7.6.1.4-SNAPSHOT</version>
+  <version>8.2.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -31,7 +31,7 @@ $ mvn package
 Copy the resulting jar to the DSpace `lib` directory:
 
 ```
-$ cp target/cgspace-java-helpers-7.6.1.4-SNAPSHOT.jar ~/dspace/lib/
+$ cp target/cgspace-java-helpers-8.2.0-SNAPSHOT.jar ~/dspace/lib/
 ```
 
 ## Configuration

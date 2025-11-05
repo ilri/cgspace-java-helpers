@@ -5,7 +5,7 @@ Java-based helpers used on the [CGSpace](https://cgspace.cgiar.org) institutiona
 - **FixLowQualityThumbnails**: remove low-quality thumbnails when PDF bitstreams are present
 - **RemoveGeneratedThumbnails**: remove generated thumbnails (in preparation for re-generating)
 
-Tested on DSpace 7.6.3. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC7x/Curation+System).
+Tested on DSpace 8.2. Read more about the [DSpace curation system](https://wiki.lyrasis.org/display/DSDOC8x/Curation+System).
 
 ## Build and Install
 
@@ -16,7 +16,7 @@ To use these curation tasks in a DSpace project add the following dependency to 
 <dependency>
   <groupId>io.github.ilri.cgspace</groupId>
   <artifactId>cgspace-java-helpers</artifactId>
-  <version>7.6.1.4-SNAPSHOT</version>
+  <version>8.2.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -32,7 +32,7 @@ $ mvn package
 Copy the resulting jar to the DSpace `lib` directory:
 
 ```console
-$ cp target/cgspace-java-helpers-7.6.1.4-SNAPSHOT.jar ~/dspace/lib/
+$ cp target/cgspace-java-helpers-8.2.0-SNAPSHOT.jar ~/dspace/lib/
 ```
 
 ## Invocation
