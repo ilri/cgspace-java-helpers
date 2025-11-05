@@ -5,9 +5,9 @@ name: Build
 
 on:
   push:
-    branches: [ dspace7 ]
+    branches: [ dspace8 ]
   pull_request:
-    branches: [ dspace7 ]
+    branches: [ dspace8 ]
 
 jobs:
   build:
