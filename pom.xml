@@ -36,7 +36,7 @@
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
-      <version>2.13.1</version>
+      <version>2.13.2</version>
       <!-- Ignore gson's dependency on error_prone_annotations because it causes dependency convergence with something pulled in by dspace-api -->
       <exclusions>
         <exclusion>
@@ -48,7 +48,7 @@
     <dependency>
       <groupId>org.dspace</groupId>
       <artifactId>dspace-api</artifactId>
-      <version>8.2</version>
+      <version>8.3</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
