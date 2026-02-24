@@ -111,13 +111,30 @@
   <repositories>
     <!-- Check Maven Central first (before other repos below) -->
     <repository>
-        <id>maven-central</id>
-        <url>https://repo.maven.apache.org/maven2</url>
+      <id>central</id>
+      <url>https://repo.maven.apache.org/maven2</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <!-- Enable access to artifacts in Sonatype's Central Portal snapshot repo for Snapshots ONLY -->
+    <repository>
+      <id>central-portal-snapshots</id>
+      <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
     </repository>
     <!-- For Handle Server -->
     <repository>
-        <id>handle.net</id>
-        <url>https://handle.net/maven</url>
+      <id>handle.net</id>
+      <url>https://handle.net/maven</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
     </repository>
   </repositories>
 </project>
